@@ -45,21 +45,23 @@ const defaultData = {
   ],
   characters: [
     {
-      id: "char-leader",
-      name: "팀장 캐릭터",
-      nation: "미정",
-      age: "미정",
-      affiliation: "소수 정예 팀",
-      role: "팀장",
-      powerStatus: "미정",
-      power: "아직 정하지 않음",
-      personality: "책임감 있고 차분한 타입으로 둘지 고민 중.",
-      speech: "어른스럽고 침착한 말투.",
-      appearance: "미정",
+      id: "char-leon-walker",
+      name: "레온 워커",
+      nation: "미국",
+      age: "31세",
+      affiliation: "N.E.B 델타",
+      role: "델타 현장 지휘관",
+      powerStatus: "능력자",
+      power: "능력명: Wind Force / 윈드 포스\n콜사인: Squall / 스콜\n무기: 커스텀 카빈 소총\n\n바람의 힘을 다루는 능력. 적의 균형을 무너뜨리고, 연기와 먼지, 독가스를 흩어내며, 팀원의 낙하를 완화하거나 자신의 이동 속도를 순간적으로 높일 수 있다. 총격전 중 시야와 사격 흐름을 보조하는 데도 사용한다.",
+      personality:
+        "나른하고 장난기가 많다.\n겉으로는 가벼워 보이지만 판단력이 뛰어나다.\n위험한 상황에서도 침착하다.\n팀원을 강하게 몰아붙이기보다 자연스럽게 움직이게 만든다.\n화를 잘 내지 않지만, 진짜 화나면 말수가 줄어든다.\n책임감이 강하지만 티 내지 않는다.\n자기 몸을 위험에 넣는 일을 별것 아닌 것처럼 넘긴다.",
+      speech: "미정",
+      appearance:
+        "키는 192cm로 크고, 체형은 늘씬하지만 힘이 느껴지는 근육질이다.\n넓은 어깨와 긴 팔다리 때문에 전술복을 입어도 실루엣이 깔끔하게 드러난다.\n머리는 자연스러운 흑발이다. 너무 단정하게 넘기기보다는 살짝 흐트러진 스타일이라, 항상 막 임무에서 돌아온 것 같은 나른한 분위기가 있다.\n눈은 짙은 검은색에 가깝고, 눈매는 살짝 내려간 듯 여유롭다. 평소에는 졸린 듯 웃고 있지만, 현장에서는 눈빛이 차갑게 가라앉아 전혀 다른 사람처럼 보인다.\n얼굴선은 뚜렷하고 남성적이다. 높은 콧대, 선명한 턱선, 얇게 웃는 입매가 특징이다. 가볍게 웃을 때는 장난스러운데, 표정이 사라지면 꽤 위압감이 있다.\n피부는 건강한 밝은 톤이고, 왼쪽 눈썹 근처에 아주 옅은 흉터가 있다. 흉터가 크지는 않지만 가까이 보면 눈에 띄어서, 그가 단순히 책상 앞 지휘관이 아니라 현장을 오래 뛴 사람이라는 인상을 준다.\n복장은 보통 검은 전술복에 가벼운 재킷을 걸친다. 장비를 과하게 달고 다니지 않고, 커스텀 카빈 소총 하나만 자연스럽게 멘다. 전체적으로 정돈되어 있지만 일부러 완벽하게 갖춰 입지는 않는 타입이다.",
       relationship: "아직 특정 인물과의 관계는 정하지 않음.",
       secret: "미정",
-      pending: "이름, 국적, 능력 여부",
-      tags: "팀장, 초반등장"
+      pending: "이름 표기 세부 확정, 과거 설정",
+      tags: "델타, 리더, 미국, 능력자, 스콜"
     },
     {
       id: "char-field",
@@ -166,6 +168,18 @@ function migrateState(data) {
   });
 
   data.organization = organization.filter((org) => org.id !== "org-team");
+
+  const characters = Array.isArray(data.characters) ? data.characters : [];
+  const leonDefault = clone(defaultData.characters.find((character) => character.id === "char-leon-walker"));
+  const oldLeaderIndex = characters.findIndex((character) => character.id === "char-leader");
+  const leonIndex = characters.findIndex((character) => character.id === "char-leon-walker");
+
+  if (leonIndex === -1) {
+    if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
+    else characters.unshift(leonDefault);
+  }
+
+  data.characters = characters.filter((character) => character.id !== "char-leader");
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   return data;
 }

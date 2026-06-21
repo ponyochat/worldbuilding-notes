@@ -52,7 +52,9 @@ const defaultData = {
       affiliation: "N.E.B 델타",
       role: "델타 현장 지휘관",
       powerStatus: "능력자",
-      power: "능력명: Wind Force / 윈드 포스\n콜사인: Squall / 스콜\n무기: 커스텀 카빈 소총\n\n바람의 힘을 다루는 능력. 적의 균형을 무너뜨리고, 연기와 먼지, 독가스를 흩어내며, 팀원의 낙하를 완화하거나 자신의 이동 속도를 순간적으로 높일 수 있다. 총격전 중 시야와 사격 흐름을 보조하는 데도 사용한다.",
+      power: "능력명: Wind Force / 윈드 포스\n무기: 커스텀 카빈 소총\n\n바람의 힘을 다루는 능력. 적의 균형을 무너뜨리고, 연기와 먼지, 독가스를 흩어내며, 팀원의 낙하를 완화하거나 자신의 이동 속도를 순간적으로 높일 수 있다. 총격전 중 시야와 사격 흐름을 보조하는 데도 사용한다.",
+      callsign:
+        "콜사인: Squall / 스콜\n뜻: 갑자기 몰아치는 돌풍, 국지성 강풍.\n유래: 작전 중 위기가 생기면 느긋하게 있다가도 한순간에 전장을 뒤집는 방식 때문에 붙은 콜사인. 바람 능력자라는 점도 있지만, 진짜 이유는 “조용하다가 갑자기 몰아친다”는 전투 스타일이다.\n현장 이미지: 조용히 흐르다가 필요한 순간 전장을 휩쓸어버리는 돌풍.",
       personality:
         "나른하고 장난기가 많다.\n겉으로는 가벼워 보이지만 판단력이 뛰어나다.\n위험한 상황에서도 침착하다.\n팀원을 강하게 몰아붙이기보다 자연스럽게 움직이게 만든다.\n화를 잘 내지 않지만, 진짜 화나면 말수가 줄어든다.\n책임감이 강하지만 티 내지 않는다.\n자기 몸을 위험에 넣는 일을 별것 아닌 것처럼 넘긴다.",
       speech: "별도 말투 설정은 사용하지 않는다.",
@@ -80,7 +82,9 @@ const defaultData = {
       role: "델타 방어/지원 요원",
       powerStatus: "능력자",
       power:
-        "능력명: Air Guard / 에어 가드\n콜사인: Assam / 아삼\n무기: HK417 전투소총\n\n공기를 압축해 방어막과 공격을 만드는 능력.\n총격, 파편, 충격을 막는 투명한 공기 방벽을 만들 수 있고, 압축한 공기를 공기탄처럼 쏘아 적을 밀어내거나 제압할 수 있다.\n레온의 Wind Force와 연계하면 바람을 더 단단한 방벽이나 공격으로 바꿀 수 있다.",
+        "능력명: Air Guard / 에어 가드\n무기: HK417 전투소총\n\n공기를 압축해 방어막과 공격을 만드는 능력.\n총격, 파편, 충격을 막는 투명한 공기 방벽을 만들 수 있고, 압축한 공기를 공기탄처럼 쏘아 적을 밀어내거나 제압할 수 있다.\n레온의 Wind Force와 연계하면 바람을 더 단단한 방벽이나 공격으로 바꿀 수 있다.",
+      callsign:
+        "콜사인: Assam / 아삼\n뜻: 진하고 묵직한 홍차 이름.\n유래: 제라드가 늘 진한 홍차를 마시는 데서 시작된 별명. 처음엔 장난처럼 붙었지만, 현장에서 그가 있으면 팀 분위기가 가라앉고 중심이 잡힌다는 뜻까지 붙었다.\n현장 이미지: 부드럽지만 쉽게 무너지지 않는 안정감.",
       personality:
         "델타에서 가장 따뜻한 사람처럼 보이지만, 동시에 가장 단단하게 팀을 붙잡는 요원.\n다정하고 섬세한 성격이다.\n팀원들의 상태를 세심하게 살피며, 필요한 순간에는 기대게 해주는 사람이다.\n하지만 무조건 받아주기만 하는 타입은 아니고, 무리하거나 선을 넘는 행동에는 단호하다.",
       speech: "미정",
@@ -105,7 +109,9 @@ const defaultData = {
       role: "델타 돌격 요원",
       powerStatus: "능력자",
       power:
-        "능력명: Fire Rush / 파이어 러시\n콜사인: Lucky / 러키\n무기: L85A3 돌격소총\n\n불꽃을 몸 주변에 두르고 빠르게 돌진하는 능력. 순간적인 폭발력과 돌파력이 강하며, 문, 장애물, 적의 방어선을 뚫는 데 특화되어 있다.",
+        "능력명: Fire Rush / 파이어 러시\n무기: L85A3 돌격소총\n\n불꽃을 몸 주변에 두르고 빠르게 돌진하는 능력. 순간적인 폭발력과 돌파력이 강하며, 문, 장애물, 적의 방어선을 뚫는 데 특화되어 있다.",
+      callsign:
+        "콜사인: Lucky / 러키\n뜻: 운 좋은 사람, 행운.\n유래: 장비를 잃어버리고 보고서를 빼먹고도 실전에서는 말도 안 되게 살아남고 이겨서 붙은 콜사인. 본인은 “실력인데요?”라고 우기지만, 델타 팀원들은 반쯤 놀리는 의미로 부른다.\n현장 이미지: 불리한 상황에서도 이상하게 길을 뚫고 살아 돌아오는 돌격수.",
       personality:
         "밝고 에너지가 넘친다.\n긴장된 상황에서도 농담을 던져 분위기를 풀어준다.\n델타의 막내답게 팀원들에게 금방 다가가고, 친해지는 속도가 빠르다.\n자신감이 넘치지만 가끔 앞뒤 계산 없이 먼저 튀어나간다.\n살짝 덤벙거려서 장비를 두고 오거나 보고 순서를 헷갈리는 일이 있다.\n그래도 현장에 들어가면 겁먹지 않고 가장 먼저 길을 뚫는다.",
       speech: "미정",
@@ -130,7 +136,9 @@ const defaultData = {
       role: "델타 기계/폭발물 전문가",
       powerStatus: "능력자",
       power:
-        "능력명: Machine Control / 머신 컨트롤\n콜사인: Romeo / 로미오\n무기: MP7 기관단총\n\n기계 장치의 구조를 감각적으로 이해하고, 손을 대거나 가까운 거리에서 조작할 수 있는 능력. 잠금장치, 드론, 차량, 폭발 장치, 보안 장비를 다루는 데 강하다. 복잡한 시스템 전체를 마음대로 해킹하는 능력은 아니지만, 현장에 있는 물리 장비와 폭발물 처리에는 매우 뛰어나다.",
+        "능력명: Machine Control / 머신 컨트롤\n무기: MP7 기관단총\n\n기계 장치의 구조를 감각적으로 이해하고, 손을 대거나 가까운 거리에서 조작할 수 있는 능력. 잠금장치, 드론, 차량, 폭발 장치, 보안 장비를 다루는 데 강하다. 복잡한 시스템 전체를 마음대로 해킹하는 능력은 아니지만, 현장에 있는 물리 장비와 폭발물 처리에는 매우 뛰어나다.",
+      callsign:
+        "콜사인: Romeo / 로미오\n뜻: 무전 알파벳의 R.\n유래: 원래는 폭발물 처리 기록에서 R 표시가 자주 붙던 것에서 시작됐다. Remote, Rig, Release처럼 원격 장치와 폭발 장비를 다루는 임무가 많았기 때문. 그런데 무전에서 R을 읽는 단어가 Romeo라 그대로 콜사인이 됐다. 본인은 별로 설명 안 해준다.\n현장 이미지: 말없이 장치를 읽고, 위험한 스위치를 가장 마지막 순간에 멈추는 전문가.",
       personality:
         "냉정하고 말수가 적다.\n필요한 말만 하고 감정 표현이 적다.\n작전 중 실수나 즉흥 행동을 싫어한다.\n판단이 빠르고, 위험한 장치를 다룰 때도 손이 흔들리지 않는다.\n테오의 즉흥적인 행동을 가장 자주 막는 사람이다.",
       speech: "미정",
@@ -234,6 +242,8 @@ function migrateState(data) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
     else characters.unshift(leonDefault);
   } else {
+    characters[leonIndex].power = leonDefault.power;
+    characters[leonIndex].callsign = leonDefault.callsign;
     characters[leonIndex].personality = leonDefault.personality;
     characters[leonIndex].appearance = leonDefault.appearance;
     characters[leonIndex].background = leonDefault.background;
@@ -250,6 +260,7 @@ function migrateState(data) {
     else characters.push(gerardDefault);
   } else {
     characters[gerardIndex].power = gerardDefault.power;
+    characters[gerardIndex].callsign = gerardDefault.callsign;
     characters[gerardIndex].personality = gerardDefault.personality;
     characters[gerardIndex].appearance = gerardDefault.appearance;
     characters[gerardIndex].background = gerardDefault.background;
@@ -452,6 +463,7 @@ document.querySelector("#addCharacterButton").addEventListener("click", () => {
     role: "",
     powerStatus: "",
     power: "",
+    callsign: "",
     personality: "",
     speech: "",
     appearance: "",
@@ -493,6 +505,7 @@ function renderCharacters() {
       <button type="button">
         <h3>${escapeHtml(character.name || "이름 없음")}</h3>
         <p class="meta-text">${escapeHtml(character.role || "직책 미정")} · ${escapeHtml(character.powerStatus || "능력 여부 미정")}</p>
+        <p class="meta-text">${escapeHtml(firstLine(character.callsign) || "콜사인 미정")}</p>
         <p class="meta-text">${escapeHtml(character.personality || "성격 미정")}</p>
         <div class="tag-row">${renderTags(character.tags)}</div>
       </button>
@@ -514,6 +527,7 @@ function fillCharacterForm(character) {
   setValue("#characterRole", character.role);
   setValue("#characterPowerStatus", character.powerStatus);
   setValue("#characterPower", character.power);
+  setValue("#characterCallsign", character.callsign);
   setValue("#characterPersonality", character.personality);
   setValue("#characterSpeech", character.speech);
   setValue("#characterAppearance", character.appearance);
@@ -539,6 +553,7 @@ characterForm.addEventListener("submit", (event) => {
     role: getValue("#characterRole"),
     powerStatus: getValue("#characterPowerStatus"),
     power: getValue("#characterPower"),
+    callsign: getValue("#characterCallsign"),
     personality: getValue("#characterPersonality"),
     speech: getValue("#characterSpeech"),
     appearance: getValue("#characterAppearance"),
@@ -698,6 +713,13 @@ function renderTags(tags) {
     .filter(Boolean)
     .map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`)
     .join("");
+}
+
+function firstLine(value) {
+  return String(value || "")
+    .split("\n")
+    .map((line) => line.trim())
+    .find(Boolean) || "";
 }
 
 function setValue(selector, value) {

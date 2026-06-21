@@ -120,6 +120,30 @@ const defaultData = {
       secret: "미정",
       pending: "비밀 설정",
       tags: "델타, 막내, 능력자, 불, 돌격, 러키"
+    },
+    {
+      id: "char-delta-mechanic",
+      name: "이름 미정",
+      nation: "독일",
+      age: "미정",
+      affiliation: "N.E.B 델타",
+      role: "델타 기계/폭발물 전문가",
+      powerStatus: "능력자",
+      power:
+        "능력명: Machine Control / 머신 컨트롤\n콜사인: 미정\n무기: 미정\n\n기계 장치의 구조를 감각적으로 이해하고, 손을 대거나 가까운 거리에서 조작할 수 있는 능력. 잠금장치, 드론, 차량, 폭발 장치, 보안 장비를 다루는 데 강하다. 복잡한 시스템 전체를 마음대로 해킹하는 능력은 아니지만, 현장에 있는 물리 장비와 폭발물 처리에는 매우 뛰어나다.",
+      personality:
+        "냉정하고 말수가 적다.\n필요한 말만 하고 감정 표현이 적다.\n작전 중 실수나 즉흥 행동을 싫어한다.\n판단이 빠르고, 위험한 장치를 다룰 때도 손이 흔들리지 않는다.\n테오의 즉흥적인 행동을 가장 자주 막는 사람이다.",
+      speech: "미정",
+      appearance:
+        "키는 189cm.\n체형은 마른 근육질이고, 팔다리가 길어 움직임이 조용하고 절제되어 있다.\n머리는 플래티넘 블론드의 긴 머리다. 평소에는 목 뒤에서 느슨하게 묶고 다닌다. 흐트러짐 없는 전술복과 달리 머리만은 조금 느슨하게 묶여 있어, 차가운 인상에 묘한 여유를 더한다.\n눈은 선명한 녹색이다. 차분하고 날카로운 시선 때문에, 말없이 바라보기만 해도 쉽게 긴장감을 준다.\n오른쪽 귀에는 작은 검은색 이어커프를 하고 있다. 장식처럼 보이지만 실제로는 통신 장비와 연결된 개인 장비다.\n손가락이 길고 손끝이 예민하다. 폭발물 해체나 장비 조작을 할 때 손 움직임이 거의 흔들리지 않는다.\n얼굴선은 날카롭고 깨끗하다. 높은 콧대와 얇은 입술, 감정이 잘 드러나지 않는 표정 때문에 쉽게 다가가기 어려워 보인다.\n전술복은 늘 완벽하게 정리되어 있다. 소매 안쪽이나 장갑 안에는 직접 개조한 작은 도구들을 숨겨둔다.",
+      background: "미정",
+      likes: "미정",
+      dislikes: "미정",
+      hobbiesTalents: "미정",
+      habits: "미정",
+      secret: "미정",
+      pending: "이름, 나이, 콜사인, 무기, 과거 설정",
+      tags: "델타, 독일, 능력자, 기계, 폭발물, 냉정"
     }
   ],
   cases: [
@@ -197,11 +221,13 @@ function migrateState(data) {
   const leonDefault = clone(defaultData.characters.find((character) => character.id === "char-leon-walker"));
   const gerardDefault = clone(defaultData.characters.find((character) => character.id === "char-gerard-winters"));
   const luckyDefault = clone(defaultData.characters.find((character) => character.id === "char-support"));
+  const mechanicDefault = clone(defaultData.characters.find((character) => character.id === "char-delta-mechanic"));
   const oldLeaderIndex = characters.findIndex((character) => character.id === "char-leader");
   const oldFieldIndex = characters.findIndex((character) => character.id === "char-field");
   const leonIndex = characters.findIndex((character) => character.id === "char-leon-walker");
   const gerardIndex = characters.findIndex((character) => character.id === "char-gerard-winters");
   const luckyIndex = characters.findIndex((character) => character.id === "char-support");
+  const mechanicIndex = characters.findIndex((character) => character.id === "char-delta-mechanic");
 
   if (leonIndex === -1) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
@@ -238,6 +264,12 @@ function migrateState(data) {
     characters.push(luckyDefault);
   } else {
     characters[luckyIndex] = luckyDefault;
+  }
+
+  if (mechanicIndex === -1) {
+    characters.push(mechanicDefault);
+  } else {
+    characters[mechanicIndex] = mechanicDefault;
   }
 
   data.characters = characters.filter((character) => character.id !== "char-leader" && character.id !== "char-field");

@@ -159,6 +159,27 @@ const defaultData = {
       habits: "생각할 때 이어커프를 손끝으로 만진다.\n누군가 큰 소리로 말하면 눈썹이 아주 살짝 찌푸려진다.",
       extra: "",
       tags: "델타, 독일, 능력자, 기계, 폭발물, 냉정"
+    },
+    {
+      id: "char-doctor-sloan",
+      name: "닥터 슬론",
+      nation: "",
+      age: "30세",
+      affiliation: "N.E.B 이오타 의료지원팀",
+      role: "의무실 상주",
+      powerStatus: "",
+      power: "",
+      callsign: "",
+      personality: "차분하다.\n현실적이다.\n침착하다.",
+      speech: "",
+      appearance: "",
+      background: "",
+      likes: "",
+      dislikes: "",
+      hobbiesTalents: "",
+      habits: "",
+      extra: "성별: 남자",
+      tags: "이오타, 의료지원팀, 의사, 남자"
     }
   ],
   cases: [
@@ -247,12 +268,14 @@ function migrateState(data) {
   const gerardDefault = clone(defaultData.characters.find((character) => character.id === "char-gerard-winters"));
   const luckyDefault = clone(defaultData.characters.find((character) => character.id === "char-support"));
   const mechanicDefault = clone(defaultData.characters.find((character) => character.id === "char-delta-mechanic"));
+  const doctorSloanDefault = clone(defaultData.characters.find((character) => character.id === "char-doctor-sloan"));
   const oldLeaderIndex = characters.findIndex((character) => character.id === "char-leader");
   const oldFieldIndex = characters.findIndex((character) => character.id === "char-field");
   const leonIndex = characters.findIndex((character) => character.id === "char-leon-walker");
   const gerardIndex = characters.findIndex((character) => character.id === "char-gerard-winters");
   const luckyIndex = characters.findIndex((character) => character.id === "char-support");
   const mechanicIndex = characters.findIndex((character) => character.id === "char-delta-mechanic");
+  const doctorSloanIndex = characters.findIndex((character) => character.id === "char-doctor-sloan");
 
   if (leonIndex === -1) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
@@ -296,6 +319,12 @@ function migrateState(data) {
     characters.push(mechanicDefault);
   } else {
     characters[mechanicIndex] = mechanicDefault;
+  }
+
+  if (doctorSloanIndex === -1) {
+    characters.push(doctorSloanDefault);
+  } else {
+    characters[doctorSloanIndex] = doctorSloanDefault;
   }
 
   data.characters = characters.filter((character) => character.id !== "char-leader" && character.id !== "char-field");

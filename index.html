@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>세계관 설정 노트</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">W</span>
+          <div>
+            <h1>세계관 설정 노트</h1>
+            <p>조직도와 캐릭터를 천천히 쌓아가는 곳</p>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="페이지 메뉴">
+          <button class="nav-item active" data-section="overview">개요</button>
+          <button class="nav-item" data-section="organization">조직도</button>
+          <button class="nav-item" data-section="characters">캐릭터</button>
+          <button class="nav-item" data-section="cases">사건 기록</button>
+          <button class="nav-item" data-section="notes">설정 메모</button>
+        </nav>
+
+        <div class="save-state" id="saveState">자동 저장 준비됨</div>
+      </aside>
+
+      <main class="content">
+        <section class="page-section active" id="overview">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Dashboard</p>
+              <h2>세계관 개요</h2>
+            </div>
+            <button class="secondary-button" id="resetDataButton">초기 예시로 되돌리기</button>
+          </div>
+
+          <div class="grid two-columns">
+            <label class="field-card">
+              <span>세계관 이름</span>
+              <input id="worldName" type="text" />
+            </label>
+            <label class="field-card">
+              <span>장르</span>
+              <input id="genre" type="text" />
+            </label>
+          </div>
+
+          <div class="grid two-columns">
+            <label class="field-card tall">
+              <span>확정된 설정</span>
+              <textarea id="confirmedSettings"></textarea>
+            </label>
+            <label class="field-card tall">
+              <span>아직 미정인 설정</span>
+              <textarea id="pendingSettings"></textarea>
+            </label>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-card">
+              <span>캐릭터</span>
+              <strong id="characterCount">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>조직 부서</span>
+              <strong id="organizationCount">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>사건</span>
+              <strong id="caseCount">0</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="page-section" id="organization">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Agency</p>
+              <h2>조직도</h2>
+            </div>
+            <button class="primary-button" id="addOrgButton">부서 추가</button>
+          </div>
+
+          <div class="org-layout">
+            <div class="org-tree" id="orgTree"></div>
+            <form class="editor-panel" id="orgForm">
+              <h3>선택한 부서 수정</h3>
+              <input type="hidden" id="orgId" />
+              <label>
+                부서 이름
+                <input id="orgName" type="text" required />
+              </label>
+              <label>
+                상위 부서
+                <select id="orgParent"></select>
+              </label>
+              <label>
+                역할 설명
+                <textarea id="orgDescription"></textarea>
+              </label>
+              <div class="button-row">
+                <button class="primary-button" type="submit">저장</button>
+                <button class="danger-button" type="button" id="deleteOrgButton">삭제</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="page-section" id="characters">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Cast</p>
+              <h2>캐릭터</h2>
+            </div>
+            <button class="primary-button" id="addCharacterButton">캐릭터 추가</button>
+          </div>
+
+          <div class="search-row">
+            <input id="characterSearch" type="search" placeholder="이름, 국적, 역할, 태그로 검색" />
+          </div>
+
+          <div class="character-grid" id="characterGrid"></div>
+        </section>
+
+        <section class="page-section" id="cases">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Cases</p>
+              <h2>사건 기록</h2>
+            </div>
+            <button class="primary-button" id="addCaseButton">사건 추가</button>
+          </div>
+
+          <div class="case-list" id="caseList"></div>
+        </section>
+
+        <section class="page-section" id="notes">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Memo</p>
+              <h2>설정 메모</h2>
+            </div>
+          </div>
+
+          <label class="field-card tall full">
+            <span>아이디어 보관함</span>
+            <textarea id="freeNotes"></textarea>
+          </label>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="characterDialog">
+      <form method="dialog" class="modal-form" id="characterForm">
+        <div class="modal-heading">
+          <h3>캐릭터 설정</h3>
+          <button class="icon-button" type="button" id="closeCharacterDialog" aria-label="닫기">X</button>
+        </div>
+        <input type="hidden" id="characterId" />
+        <div class="grid two-columns">
+          <label>이름<input id="characterName" type="text" required /></label>
+          <label>국적<input id="characterNation" type="text" /></label>
+          <label>나이<input id="characterAge" type="text" /></label>
+          <label>소속<input id="characterAffiliation" type="text" /></label>
+          <label>직책<input id="characterRole" type="text" /></label>
+          <label>초능력 여부<input id="characterPowerStatus" type="text" /></label>
+        </div>
+        <label>능력<textarea id="characterPower"></textarea></label>
+        <label>성격<textarea id="characterPersonality"></textarea></label>
+        <label>말투<textarea id="characterSpeech"></textarea></label>
+        <label>외형<textarea id="characterAppearance"></textarea></label>
+        <label>유저와의 관계<textarea id="characterRelationship"></textarea></label>
+        <label>비밀<textarea id="characterSecret"></textarea></label>
+        <label>아직 미정<textarea id="characterPending"></textarea></label>
+        <label>태그<input id="characterTags" type="text" placeholder="예: 팀장, 능력자, 냉미남" /></label>
+        <div class="button-row">
+          <button class="primary-button" type="submit">저장</button>
+          <button class="danger-button" type="button" id="deleteCharacterButton">삭제</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="caseDialog">
+      <form method="dialog" class="modal-form" id="caseForm">
+        <div class="modal-heading">
+          <h3>사건 기록</h3>
+          <button class="icon-button" type="button" id="closeCaseDialog" aria-label="닫기">X</button>
+        </div>
+        <input type="hidden" id="caseId" />
+        <label>사건명<input id="caseTitle" type="text" required /></label>
+        <label>발생 장소<input id="caseLocation" type="text" /></label>
+        <label>관련 범죄<textarea id="caseCrime"></textarea></label>
+        <label>등장 캐릭터<textarea id="caseCharacters"></textarea></label>
+        <label>유저의 역할<textarea id="caseUserRole"></textarea></label>
+        <label>해결 여부<input id="caseStatus" type="text" /></label>
+        <label>남은 떡밥<textarea id="caseHooks"></textarea></label>
+        <div class="button-row">
+          <button class="primary-button" type="submit">저장</button>
+          <button class="danger-button" type="button" id="deleteCaseButton">삭제</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>

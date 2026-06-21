@@ -7,7 +7,7 @@ const defaultData = {
     confirmedSettings:
       "정식 명칭: N.E.B 국제특무청\n영문 약자: N.E.B = Nexus Enforcement Bureau\n통칭: 네브\n성격: 특정 국가에 속하지 않은 공식 국제 특수범죄 대응 기관\n담당 사건: 초능력 범죄, 국제 범죄, 괴이한 사건, 상류층 범죄\n구성원: 초능력자와 비능력자가 함께 범죄와 싸운다.\n내부 대분류: 시그마, 델타, 세타\n시그마: 최상위 전략 부서. 사건 배정, 작전 승인, 전체 지휘를 맡는다.\n델타: 현장 작전 부서. 추적, 체포, 진압, 구출을 맡는다.\n세타: 분석과 이상 사건 조사 부서. 정보, 연구, 정신계나 괴이 사건 해석을 맡는다.\n초반에는 너무 많은 캐릭터를 등장시키지 않는다.",
     pendingSettings:
-      "팀 이름\n유저의 입장\n초능력 규칙\n첫 사건",
+      "세부 팀 이름\n초능력 규칙\n첫 사건 유형\n주요 범죄 조직",
     freeNotes:
       "아이디어를 여기에 편하게 적어둬.\n\n예:\n- 공식적이고 멋진 분위기\n- 국제기구 + 엘리트 수사기관 느낌\n- 초반 캐릭터는 3명 정도"
   },
@@ -38,9 +38,9 @@ const defaultData = {
     },
     {
       id: "org-team",
-      name: "주인공이 만나는 소수 정예 팀",
+      name: "델타 소수 정예팀",
       parentId: "org-delta",
-      description: "델타 산하 소수 정예팀. 초반 이야기가 시작되는 팀이며, 팀장, 현장 요원, 분석 담당 정도만 먼저 등장."
+      description: "델타 산하 현장 전담팀 후보. 구체적인 인물과 이야기 시작점은 아직 정하지 않는다."
     }
   ],
   characters: [
@@ -56,7 +56,7 @@ const defaultData = {
       personality: "책임감 있고 차분한 타입으로 둘지 고민 중.",
       speech: "어른스럽고 침착한 말투.",
       appearance: "미정",
-      relationship: "유저를 평가하거나 보호하는 위치.",
+      relationship: "아직 특정 인물과의 관계는 정하지 않음.",
       secret: "미정",
       pending: "이름, 국적, 능력 여부",
       tags: "팀장, 초반등장"
@@ -73,7 +73,7 @@ const defaultData = {
       personality: "날카롭거나 장난기 있는 타입 후보.",
       speech: "미정",
       appearance: "미정",
-      relationship: "첫 사건에서 유저와 같이 움직일 수 있음.",
+      relationship: "아직 특정 인물과의 관계는 정하지 않음.",
       secret: "미정",
       pending: "능력자 또는 비능력자 중 선택",
       tags: "현장요원, 초반등장"
@@ -90,7 +90,7 @@ const defaultData = {
       personality: "머리 좋고 섬세한 타입 후보.",
       speech: "차분하고 정확한 말투.",
       appearance: "미정",
-      relationship: "유저의 상태나 능력을 분석하는 역할.",
+      relationship: "아직 특정 인물과의 관계는 정하지 않음.",
       secret: "미정",
       pending: "의료 담당인지 기술 담당인지 정하기",
       tags: "분석, 지원, 초반등장"
@@ -103,9 +103,9 @@ const defaultData = {
       location: "미정",
       crime: "초능력 범죄 또는 국제 범죄 후보.",
       characters: "초반 3인 팀",
-      userRole: "보호 대상, 목격자, 신입 중 선택.",
+      userRole: "아직 정하지 않음.",
       status: "미정",
-      hooks: "유저가 왜 중요해지는지 정하기."
+      hooks: "이 사건이 N.E.B 전체 설정과 어떻게 이어지는지 정하기."
     }
   ]
 };

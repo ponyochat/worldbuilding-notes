@@ -23,7 +23,6 @@
           <button class="nav-item" data-section="characters">캐릭터</button>
           <button class="nav-item" data-section="cases">사건 기록</button>
           <button class="nav-item" data-section="notes">설정 메모</button>
-          <button class="nav-item" data-section="cloud">클라우드</button>
         </nav>
 
         <div class="save-state" id="saveState">자동 저장 준비됨</div>
@@ -36,7 +35,10 @@
               <p class="eyebrow">Dashboard</p>
               <h2>세계관 개요</h2>
             </div>
-            <button class="secondary-button" id="resetDataButton">초기 예시로 되돌리기</button>
+            <div class="button-row">
+              <button class="primary-button page-save-button" data-save-section="overview" type="button">저장</button>
+              <button class="secondary-button" id="resetDataButton" type="button">초기 예시로 되돌리기</button>
+            </div>
           </div>
 
           <div class="grid two-columns">
@@ -83,7 +85,10 @@
               <p class="eyebrow">Agency</p>
               <h2>조직도</h2>
             </div>
-            <button class="primary-button" id="addOrgButton">부서 추가</button>
+            <div class="button-row">
+              <button class="primary-button page-save-button" data-save-section="organization" type="button">저장</button>
+              <button class="primary-button" id="addOrgButton" type="button">부서 추가</button>
+            </div>
           </div>
 
           <div class="org-layout">
@@ -117,7 +122,10 @@
               <p class="eyebrow">Cast</p>
               <h2>캐릭터</h2>
             </div>
-            <button class="primary-button" id="addCharacterButton">캐릭터 추가</button>
+            <div class="button-row">
+              <button class="primary-button page-save-button" data-save-section="characters" type="button">저장</button>
+              <button class="primary-button" id="addCharacterButton" type="button">캐릭터 추가</button>
+            </div>
           </div>
 
           <div class="search-row">
@@ -133,7 +141,10 @@
               <p class="eyebrow">Cases</p>
               <h2>사건 기록</h2>
             </div>
-            <button class="primary-button" id="addCaseButton">사건 추가</button>
+            <div class="button-row">
+              <button class="primary-button page-save-button" data-save-section="cases" type="button">저장</button>
+              <button class="primary-button" id="addCaseButton" type="button">사건 추가</button>
+            </div>
           </div>
 
           <div class="case-list" id="caseList"></div>
@@ -145,6 +156,7 @@
               <p class="eyebrow">Memo</p>
               <h2>설정 메모</h2>
             </div>
+            <button class="primary-button page-save-button" data-save-section="notes" type="button">저장</button>
           </div>
 
           <label class="field-card tall full">
@@ -153,56 +165,6 @@
           </label>
         </section>
 
-        <section class="page-section" id="cloud">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Sync</p>
-              <h2>클라우드 저장</h2>
-            </div>
-          </div>
-
-          <div class="cloud-layout">
-            <div class="field-card full">
-              <span>상태</span>
-              <p class="helper-text" id="cloudStatus">아직 연결하지 않았어.</p>
-            </div>
-
-            <label class="field-card full">
-              <span>GitHub 토큰</span>
-              <input id="githubToken" type="password" placeholder="토큰을 붙여넣어줘" autocomplete="off" />
-              <small>토큰은 이 브라우저에만 저장돼. GitHub에 저장하고 불러올 때만 사용해.</small>
-            </label>
-
-            <div class="grid two-columns">
-              <label class="field-card">
-                <span>저장소 주인</span>
-                <input id="githubOwner" type="text" />
-              </label>
-              <label class="field-card">
-                <span>저장소 이름</span>
-                <input id="githubRepo" type="text" />
-              </label>
-            </div>
-
-            <label class="field-card full">
-              <span>저장 파일 위치</span>
-              <input id="githubPath" type="text" />
-            </label>
-
-            <div class="button-row cloud-buttons">
-              <button class="secondary-button" id="saveCloudSettingsButton" type="button">연결 정보 저장</button>
-              <button class="primary-button" id="uploadCloudButton" type="button">GitHub에 저장</button>
-              <button class="primary-button" id="downloadCloudButton" type="button">GitHub에서 불러오기</button>
-            </div>
-
-            <div class="field-card full">
-              <span>다른 PC에서 쓰는 법</span>
-              <p class="helper-text">
-                같은 웹 주소를 열고, 같은 GitHub 토큰을 넣은 뒤 “GitHub에서 불러오기”를 누르면 돼.
-              </p>
-            </div>
-          </div>
-        </section>
       </main>
     </div>
 

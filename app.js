@@ -1,6 +1,4 @@
 const STORAGE_KEY = "worldbuilding-note-v1";
-const CLOUD_SETTINGS_KEY = "worldbuilding-note-cloud-v1";
-const CLOUD_TOKEN_KEY = "worldbuilding-note-github-token-v1";
 
 const defaultData = {
   overview: {
@@ -95,7 +93,6 @@ const defaultData = {
 };
 
 let state = loadState();
-let cloudSettings = loadCloudSettings();
 let activeOrgId = state.organization[0]?.id || "";
 
 const sections = document.querySelectorAll(".page-section");
@@ -108,13 +105,6 @@ const fields = {
   confirmedSettings: document.querySelector("#confirmedSettings"),
   pendingSettings: document.querySelector("#pendingSettings"),
   freeNotes: document.querySelector("#freeNotes")
-};
-
-const cloudFields = {
-  token: document.querySelector("#githubToken"),
-  owner: document.querySelector("#githubOwner"),
-  repo: document.querySelector("#githubRepo"),
-  path: document.querySelector("#githubPath")
 };
 
 function clone(value) {
@@ -132,23 +122,6 @@ function loadState() {
   }
 }
 
-function loadCloudSettings() {
-  const saved = localStorage.getItem(CLOUD_SETTINGS_KEY);
-  const fallback = {
-    owner: "ponyochat",
-    repo: "worldbuilding-notes",
-    path: "world-data.json"
-  };
-
-  if (!saved) return fallback;
-
-  try {
-    return { ...fallback, ...JSON.parse(saved) };
-  } catch {
-    return fallback;
-  }
-}
-
 function persist() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   saveState.textContent = `자동 저장됨 ${new Date().toLocaleTimeString("ko-KR", {
@@ -156,18 +129,6 @@ function persist() {
     minute: "2-digit"
   })}`;
   renderCounts();
-}
-
-function persistCloudSettings() {
-  cloudSettings.owner = cloudFields.owner.value.trim() || "ponyochat";
-  cloudSettings.repo = cloudFields.repo.value.trim() || "worldbuilding-notes";
-  cloudSettings.path = cloudFields.path.value.trim() || "world-data.json";
-  localStorage.setItem(CLOUD_SETTINGS_KEY, JSON.stringify(cloudSettings));
-
-  const token = cloudFields.token.value.trim();
-  if (token) localStorage.setItem(CLOUD_TOKEN_KEY, token);
-
-  setCloudStatus("연결 정보를 저장했어.");
 }
 
 function makeId(prefix) {
@@ -195,14 +156,9 @@ Object.entries(fields).forEach(([key, element]) => {
   });
 });
 
-cloudFields.owner.value = cloudSettings.owner;
-cloudFields.repo.value = cloudSettings.repo;
-cloudFields.path.value = cloudSettings.path;
-cloudFields.token.value = localStorage.getItem(CLOUD_TOKEN_KEY) || "";
-
-document.querySelector("#saveCloudSettingsButton").addEventListener("click", persistCloudSettings);
-document.querySelector("#uploadCloudButton").addEventListener("click", uploadToCloud);
-document.querySelector("#downloadCloudButton").addEventListener("click", downloadFromCloud);
+document.querySelectorAll(".page-save-button").forEach((button) => {
+  button.addEventListener("click", () => saveSection(button.dataset.saveSection));
+});
 
 document.querySelector("#resetDataButton").addEventListener("click", () => {
   if (!confirm("지금 저장된 내용을 지우고 초기 예시로 되돌릴까?")) return;
@@ -297,6 +253,10 @@ document.querySelector("#addOrgButton").addEventListener("click", () => {
 
 document.querySelector("#orgForm").addEventListener("submit", (event) => {
   event.preventDefault();
+  saveOrgForm();
+});
+
+function saveOrgForm() {
   const org = state.organization.find((item) => item.id === document.querySelector("#orgId").value);
   if (!org) return;
 
@@ -305,7 +265,7 @@ document.querySelector("#orgForm").addEventListener("submit", (event) => {
   org.description = document.querySelector("#orgDescription").value.trim();
   renderOrganization();
   persist();
-});
+}
 
 document.querySelector("#deleteOrgButton").addEventListener("click", () => {
   if (state.organization.length <= 1) {
@@ -572,123 +532,14 @@ function renderAll() {
   renderCases();
 }
 
+function saveSection(sectionId) {
+  if (sectionId === "organization") {
+    saveOrgForm();
+    return;
+  }
+
+  persist();
+  saveState.textContent = "저장됨";
+}
+
 renderAll();
-
-function getCloudConfig() {
-  persistCloudSettings();
-  const token = cloudFields.token.value.trim();
-  if (!token) {
-    throw new Error("GitHub 토큰을 먼저 넣어줘.");
-  }
-
-  return {
-    token,
-    owner: cloudSettings.owner,
-    repo: cloudSettings.repo,
-    path: cloudSettings.path
-  };
-}
-
-function setCloudStatus(message) {
-  document.querySelector("#cloudStatus").textContent = message;
-}
-
-async function uploadToCloud() {
-  try {
-    const config = getCloudConfig();
-    setCloudStatus("GitHub에 저장하는 중이야...");
-
-    const current = await fetchCloudFile(config);
-    const content = JSON.stringify(
-      {
-        savedAt: new Date().toISOString(),
-        appVersion: 1,
-        data: state
-      },
-      null,
-      2
-    );
-
-    const response = await fetch(githubFileUrl(config), {
-      method: "PUT",
-      headers: githubHeaders(config.token),
-      body: JSON.stringify({
-        message: "Update worldbuilding data",
-        content: btoa(unescape(encodeURIComponent(content))),
-        sha: current?.sha
-      })
-    });
-
-    if (!response.ok) throw new Error(await githubErrorMessage(response));
-    setCloudStatus("GitHub에 저장했어. 다른 PC에서 불러올 수 있어.");
-  } catch (error) {
-    setCloudStatus(error.message);
-  }
-}
-
-async function downloadFromCloud() {
-  try {
-    const config = getCloudConfig();
-    setCloudStatus("GitHub에서 불러오는 중이야...");
-
-    const current = await fetchCloudFile(config);
-    if (!current) {
-      throw new Error("아직 GitHub에 저장된 데이터가 없어. 먼저 이 PC에서 저장해줘.");
-    }
-
-    const text = decodeURIComponent(escape(atob(current.content.replace(/\s/g, ""))));
-    const parsed = JSON.parse(text);
-    if (!parsed.data) throw new Error("저장 파일 모양이 맞지 않아.");
-
-    state = parsed.data;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    Object.entries(fields).forEach(([key, element]) => {
-      element.value = state.overview[key] || "";
-    });
-    activeOrgId = state.organization[0]?.id || "";
-    renderAll();
-    setCloudStatus("GitHub에서 불러왔어.");
-  } catch (error) {
-    setCloudStatus(error.message);
-  }
-}
-
-async function fetchCloudFile(config) {
-  const response = await fetch(githubFileUrl(config), {
-    headers: githubHeaders(config.token)
-  });
-
-  if (response.status === 404) return null;
-  if (!response.ok) throw new Error(await githubErrorMessage(response));
-  return response.json();
-}
-
-function githubFileUrl(config) {
-  const path = config.path
-    .split("/")
-    .map((part) => encodeURIComponent(part))
-    .join("/");
-  return `https://api.github.com/repos/${encodeURIComponent(config.owner)}/${encodeURIComponent(
-    config.repo
-  )}/contents/${path}`;
-}
-
-function githubHeaders(token) {
-  return {
-    Authorization: `Bearer ${token}`,
-    Accept: "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28"
-  };
-}
-
-async function githubErrorMessage(response) {
-  try {
-    const data = await response.json();
-    if (response.status === 401) return "토큰이 맞지 않거나 권한이 부족해.";
-    if (response.status === 403) return "GitHub 권한이 부족해. 토큰 권한을 확인해줘.";
-    if (response.status === 404) return "저장소를 찾지 못했어.";
-    return data.message || "GitHub 요청이 실패했어.";
-  } catch {
-    return "GitHub 요청이 실패했어.";
-  }
-}

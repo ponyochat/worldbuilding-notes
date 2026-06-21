@@ -154,9 +154,7 @@ function migrateState(data) {
     main.description = defaultsById["org-main"].description;
   }
 
-  data.organization = organization.filter(
-    (org) => org.id !== "org-team" && org.name !== "주인공이 만나는 소수 정예 팀" && org.name !== "델타 소수 정예팀"
-  );
+  data.organization = organization.filter((org) => org.id !== "org-team");
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   return data;
 }

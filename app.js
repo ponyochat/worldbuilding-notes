@@ -2,21 +2,21 @@ const STORAGE_KEY = "worldbuilding-note-v1";
 
 const defaultData = {
   overview: {
-    worldName: "미정",
+    worldName: "N.E.B 국제특무청",
     genre: "여성향, 공식 국제 범죄 대응 기관, 다국적 능력자",
     confirmedSettings:
-      "특정 국가에 속하지 않은 공식 국제 기관이 있다.\n초능력자와 비능력자가 함께 범죄와 싸운다.\n처음에는 너무 많은 캐릭터를 등장시키지 않는다.",
+      "정식 명칭: N.E.B 국제특무청\n영문 약자: N.E.B = Nexus Enforcement Bureau\n통칭: 네브\n성격: 특정 국가에 속하지 않은 공식 국제 특수범죄 대응 기관\n담당 사건: 초능력 범죄, 국제 범죄, 괴이한 사건, 상류층 범죄\n구성원: 초능력자와 비능력자가 함께 범죄와 싸운다.\n초반에는 너무 많은 캐릭터를 등장시키지 않는다.",
     pendingSettings:
-      "기관 이름\n팀 이름\n유저의 입장\n초능력 규칙\n첫 사건",
+      "팀 이름\n유저의 입장\n초능력 규칙\n첫 사건",
     freeNotes:
       "아이디어를 여기에 편하게 적어둬.\n\n예:\n- 공식적이고 멋진 분위기\n- 국제기구 + 엘리트 수사기관 느낌\n- 초반 캐릭터는 3명 정도"
   },
   organization: [
     {
       id: "org-main",
-      name: "공식 국제 범죄 대응 기관",
+      name: "N.E.B 국제특무청",
       parentId: "",
-      description: "전 세계 특수 범죄를 다루는 상위 기관. 이름은 아직 미정."
+      description: "Nexus Enforcement Bureau. 전 세계 특수 범죄를 다루는 공식 국제 기관."
     },
     {
       id: "org-team",

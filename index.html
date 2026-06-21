@@ -23,6 +23,7 @@
           <button class="nav-item" data-section="characters">캐릭터</button>
           <button class="nav-item" data-section="cases">사건 기록</button>
           <button class="nav-item" data-section="notes">설정 메모</button>
+          <button class="nav-item" data-section="cloud">클라우드</button>
         </nav>
 
         <div class="save-state" id="saveState">자동 저장 준비됨</div>
@@ -150,6 +151,57 @@
             <span>아이디어 보관함</span>
             <textarea id="freeNotes"></textarea>
           </label>
+        </section>
+
+        <section class="page-section" id="cloud">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Sync</p>
+              <h2>클라우드 저장</h2>
+            </div>
+          </div>
+
+          <div class="cloud-layout">
+            <div class="field-card full">
+              <span>상태</span>
+              <p class="helper-text" id="cloudStatus">아직 연결하지 않았어.</p>
+            </div>
+
+            <label class="field-card full">
+              <span>GitHub 토큰</span>
+              <input id="githubToken" type="password" placeholder="토큰을 붙여넣어줘" autocomplete="off" />
+              <small>토큰은 이 브라우저에만 저장돼. GitHub에 저장하고 불러올 때만 사용해.</small>
+            </label>
+
+            <div class="grid two-columns">
+              <label class="field-card">
+                <span>저장소 주인</span>
+                <input id="githubOwner" type="text" />
+              </label>
+              <label class="field-card">
+                <span>저장소 이름</span>
+                <input id="githubRepo" type="text" />
+              </label>
+            </div>
+
+            <label class="field-card full">
+              <span>저장 파일 위치</span>
+              <input id="githubPath" type="text" />
+            </label>
+
+            <div class="button-row cloud-buttons">
+              <button class="secondary-button" id="saveCloudSettingsButton" type="button">연결 정보 저장</button>
+              <button class="primary-button" id="uploadCloudButton" type="button">GitHub에 저장</button>
+              <button class="primary-button" id="downloadCloudButton" type="button">GitHub에서 불러오기</button>
+            </div>
+
+            <div class="field-card full">
+              <span>다른 PC에서 쓰는 법</span>
+              <p class="helper-text">
+                같은 웹 주소를 열고, 같은 GitHub 토큰을 넣은 뒤 “GitHub에서 불러오기”를 누르면 돼.
+              </p>
+            </div>
+          </div>
         </section>
       </main>
     </div>

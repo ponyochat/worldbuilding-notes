@@ -187,6 +187,15 @@ label {
   font-weight: 700;
 }
 
+small,
+.helper-text {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
+  margin: 0;
+}
+
 input,
 textarea,
 select {
@@ -431,7 +440,7 @@ dialog::backdrop {
   }
 
   .nav-list {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .nav-item {

@@ -98,19 +98,27 @@ const defaultData = {
     },
     {
       id: "char-support",
-      name: "분석 담당 캐릭터",
+      name: "이름 미정",
       nation: "미정",
       age: "미정",
-      affiliation: "소수 정예 팀",
-      role: "분석/지원 담당",
-      powerStatus: "비능력자 후보",
-      power: "없거나, 아주 특수한 보조 능력 후보.",
-      personality: "머리 좋고 섬세한 타입 후보.",
-      speech: "차분하고 정확한 말투.",
-      appearance: "미정",
+      affiliation: "N.E.B 델타",
+      role: "델타 돌격 요원",
+      powerStatus: "능력자",
+      power:
+        "능력명: Fire Rush / 파이어 러시\n콜사인: Lucky / 러키\n무기: 미정\n\n불꽃을 몸 주변에 두르고 빠르게 돌진하는 능력. 순간적인 폭발력과 돌파력이 강하며, 문, 장애물, 적의 방어선을 뚫는 데 특화되어 있다.",
+      personality:
+        "밝고 에너지가 넘친다.\n긴장된 상황에서도 농담을 던져 분위기를 풀어준다.\n델타의 막내답게 팀원들에게 금방 다가가고, 친해지는 속도가 빠르다.\n자신감이 넘치지만 가끔 앞뒤 계산 없이 먼저 튀어나간다.\n살짝 덤벙거려서 장비를 두고 오거나 보고 순서를 헷갈리는 일이 있다.\n그래도 현장에 들어가면 겁먹지 않고 가장 먼저 길을 뚫는다.",
+      speech: "미정",
+      appearance:
+        "키는 187cm.\n체형은 탄탄하고 민첩한 근육질이다.\n전체적으로 가볍고 빠르게 움직이는 인상이 강하다.\n머리는 밝은 갈색이고, 햇빛을 받으면 더 붉은빛이 돈다. 항상 살짝 흐트러져 있어 정돈된 느낌보다는 생동감이 먼저 느껴진다.\n눈동자는 금색이다. 표정이 워낙 밝아서 눈빛도 장난스럽게 반짝이는 편이다. 웃을 때는 사람을 금방 끌어당기는 힘이 있다.\n얼굴은 선명하고 시원한 인상이다. 소년 같은 활기와 성숙한 현장 요원의 날카로움이 같이 있다. 가만히 있어도 에너지가 넘쳐 보여서, 조용한 방 안에서도 가장 먼저 눈에 띈다.\n복장은 전술복을 입어도 어딘가 편하게 걸친 느낌이 있다. 장비는 제대로 챙기지만, 작은 물건을 다른 주머니에 넣어두고 찾는 일이 종종 있다.",
+      background: "미정",
+      likes: "미정",
+      dislikes: "미정",
+      hobbiesTalents: "미정",
+      habits: "미정",
       secret: "미정",
-      pending: "의료 담당인지 기술 담당인지 정하기",
-      tags: "분석, 지원, 초반등장"
+      pending: "이름, 나이, 국적, 무기, 과거 설정",
+      tags: "델타, 막내, 능력자, 불, 돌격, 러키"
     }
   ],
   cases: [
@@ -187,10 +195,12 @@ function migrateState(data) {
   const characters = Array.isArray(data.characters) ? data.characters : [];
   const leonDefault = clone(defaultData.characters.find((character) => character.id === "char-leon-walker"));
   const gerardDefault = clone(defaultData.characters.find((character) => character.id === "char-gerard-winters"));
+  const luckyDefault = clone(defaultData.characters.find((character) => character.id === "char-support"));
   const oldLeaderIndex = characters.findIndex((character) => character.id === "char-leader");
   const oldFieldIndex = characters.findIndex((character) => character.id === "char-field");
   const leonIndex = characters.findIndex((character) => character.id === "char-leon-walker");
   const gerardIndex = characters.findIndex((character) => character.id === "char-gerard-winters");
+  const luckyIndex = characters.findIndex((character) => character.id === "char-support");
 
   if (leonIndex === -1) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
@@ -221,6 +231,12 @@ function migrateState(data) {
     characters[gerardIndex].habits = gerardDefault.habits;
     characters[gerardIndex].secret = gerardDefault.secret;
     characters[gerardIndex].pending = gerardDefault.pending;
+  }
+
+  if (luckyIndex === -1) {
+    characters.push(luckyDefault);
+  } else {
+    characters[luckyIndex] = luckyDefault;
   }
 
   data.characters = characters.filter((character) => character.id !== "char-leader" && character.id !== "char-field");

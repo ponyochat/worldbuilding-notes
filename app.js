@@ -5,7 +5,7 @@ const defaultData = {
     worldName: "N.E.B 국제특무청",
     genre: "여성향, 공식 국제 범죄 대응 기관, 다국적 능력자",
     confirmedSettings:
-      "정식 명칭: N.E.B 국제특무청\n영문 약자: N.E.B = Nexus Enforcement Bureau\n통칭: 네브\n성격: 특정 국가에 속하지 않은 공식 국제 특수범죄 대응 기관\n담당 사건: 초능력 범죄, 국제 범죄, 괴이한 사건, 상류층 범죄\n구성원: 초능력자와 비능력자가 함께 범죄와 싸운다.\n내부 대분류: 시그마, 델타, 세타\n시그마: 최상위 전략 부서. 사건 배정, 작전 승인, 전체 지휘를 맡는다.\n델타: 현장 작전 부서. 추적, 체포, 진압, 구출을 맡는다.\n세타: 분석과 이상 사건 조사 부서. 정보, 연구, 정신계나 괴이 사건 해석을 맡는다.\n초반에는 너무 많은 캐릭터를 등장시키지 않는다.",
+      "정식 명칭: N.E.B 국제특무청\n영문 약자: N.E.B = Nexus Enforcement Bureau\n통칭: 네브\n성격: 특정 국가에 속하지 않은 공식 국제 특수범죄 대응 기관\n담당 사건: 초능력 범죄, 국제 범죄, 괴이한 사건, 상류층 범죄\n구성원: 초능력자와 비능력자가 함께 범죄와 싸운다.\n최고 의사결정 기구: 상임이사회\n내부 대분류: 시그마, 델타, 세타\n시그마: 최상위 전략 부서. 사건 배정, 작전 승인, 전체 지휘를 맡는다.\n델타: 현장 작전 부서. 추적, 체포, 진압, 구출을 맡는다.\n세타: 분석과 이상 사건 조사 부서. 정보, 연구, 정신계나 괴이 사건 해석을 맡는다.\n초반에는 너무 많은 캐릭터를 등장시키지 않는다.",
     pendingSettings:
       "세부 팀 이름\n초능력 규칙\n첫 사건 유형\n주요 범죄 조직",
     freeNotes:
@@ -19,21 +19,27 @@ const defaultData = {
       description: "Nexus Enforcement Bureau. 전 세계 특수 범죄를 다루는 공식 국제 기관."
     },
     {
+      id: "org-board",
+      name: "상임이사회",
+      parentId: "org-main",
+      description: "N.E.B의 최고 의사결정 기구. 예산, 권한, 국제 협정, 최상위 작전 승인권을 가진다."
+    },
+    {
       id: "org-sigma",
       name: "시그마",
-      parentId: "org-main",
+      parentId: "org-board",
       description: "N.E.B 내부 최상위 전략 부서. 사건 배정, 작전 승인, 전체 지휘를 맡는다."
     },
     {
       id: "org-delta",
       name: "델타",
-      parentId: "org-main",
+      parentId: "org-board",
       description: "현장 작전 부서. 추적, 체포, 진압, 구출 같은 직접 작전을 맡는다."
     },
     {
       id: "org-theta",
       name: "세타",
-      parentId: "org-main",
+      parentId: "org-board",
       description: "분석과 이상 사건 조사 부서. 정보, 연구, 정신계나 괴이 사건 해석을 맡는다."
     }
   ],
@@ -142,7 +148,7 @@ function migrateState(data) {
   const organization = Array.isArray(data.organization) ? data.organization : [];
   const defaultsById = Object.fromEntries(defaultData.organization.map((org) => [org.id, org]));
 
-  ["org-main", "org-sigma", "org-delta", "org-theta"].forEach((id) => {
+  ["org-main", "org-board", "org-sigma", "org-delta", "org-theta"].forEach((id) => {
     if (!organization.some((org) => org.id === id)) {
       organization.push(clone(defaultsById[id]));
     }
@@ -153,6 +159,11 @@ function migrateState(data) {
     main.name = defaultsById["org-main"].name;
     main.description = defaultsById["org-main"].description;
   }
+
+  ["org-sigma", "org-delta", "org-theta"].forEach((id) => {
+    const org = organization.find((item) => item.id === id);
+    if (org) org.parentId = "org-board";
+  });
 
   data.organization = organization.filter((org) => org.id !== "org-team");
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));

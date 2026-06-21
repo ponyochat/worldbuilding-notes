@@ -94,7 +94,7 @@ const defaultData = {
       likes: "진한 홍차\n비 오는 날\n독서",
       dislikes: "단맛\n아픈 사람",
       hobbiesTalents: "취미:\n서점 구경\n\n특기:\n요리",
-      habits: "미정",
+      habits: "아침마다 조깅 후 홍차 한 잔을 마시는 루틴이 있다.",
       extra: "",
       tags: "델타, 미국, 능력자, 방어, 지원"
     },

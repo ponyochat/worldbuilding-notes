@@ -100,7 +100,7 @@ const defaultData = {
       id: "char-support",
       name: "테오 플린",
       nation: "영국",
-      age: "미정",
+      age: "26세",
       affiliation: "N.E.B 델타",
       role: "델타 돌격 요원",
       powerStatus: "능력자",
@@ -116,9 +116,9 @@ const defaultData = {
       likes: "매운 감자칩\n탄산음료\n액션 영화\n축구 경기\n불꽃놀이",
       dislikes: "개를 무서워한다\n잔소리\n가만히 대기하는 시간\n복잡한 서류 작업\n쓴 커피",
       hobbiesTalents: "취미:\n액션 게임\n축구\n운동화 모으기\n\n특기:\n근접 돌파\n순간 판단\n불꽃 추진을 이용한 고속 이동",
-      habits: "미정",
+      habits: "흥분하면 말이 빨라진다.\n불꽃을 손끝에 작게 튕기며 논다.",
       secret: "미정",
-      pending: "나이, 버릇, 비밀 설정",
+      pending: "비밀 설정",
       tags: "델타, 막내, 능력자, 불, 돌격, 러키"
     }
   ],

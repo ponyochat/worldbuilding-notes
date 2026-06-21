@@ -134,10 +134,48 @@ function loadState() {
   if (!saved) return clone(defaultData);
 
   try {
-    return { ...clone(defaultData), ...JSON.parse(saved) };
+    return migrateState({ ...clone(defaultData), ...JSON.parse(saved) });
   } catch {
     return clone(defaultData);
   }
+}
+
+function migrateState(data) {
+  if (data.overview?.pendingSettings === "팀 이름\n유저의 입장\n초능력 규칙\n첫 사건") {
+    data.overview.pendingSettings = defaultData.overview.pendingSettings;
+  }
+
+  const organization = Array.isArray(data.organization) ? data.organization : [];
+  const defaultsById = Object.fromEntries(defaultData.organization.map((org) => [org.id, org]));
+
+  ["org-main", "org-sigma", "org-delta", "org-theta", "org-team"].forEach((id) => {
+    if (!organization.some((org) => org.id === id)) {
+      organization.push(clone(defaultsById[id]));
+    }
+  });
+
+  const main = organization.find((org) => org.id === "org-main");
+  if (main && main.name === "공식 국제 범죄 대응 기관") {
+    main.name = defaultsById["org-main"].name;
+    main.description = defaultsById["org-main"].description;
+  }
+
+  const team = organization.find((org) => org.id === "org-team");
+  if (team) {
+    if (team.name === "주인공이 만나는 소수 정예 팀") {
+      team.name = defaultsById["org-team"].name;
+    }
+    if (team.description.includes("초반 이야기가 시작되는 팀")) {
+      team.description = defaultsById["org-team"].description;
+    }
+    if (team.parentId === "org-main") {
+      team.parentId = "org-delta";
+    }
+  }
+
+  data.organization = organization;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  return data;
 }
 
 function persist() {

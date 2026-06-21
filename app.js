@@ -11,6 +11,10 @@ const defaultData = {
     freeNotes:
       "아이디어를 여기에 편하게 적어둬.\n\n예:\n- 공식적이고 멋진 분위기\n- 국제기구 + 엘리트 수사기관 느낌\n- 초반 캐릭터는 3명 정도"
   },
+  background: {
+    headquarters:
+      "N.E.B 워싱턴 본청\n\n위치:\n미국 워싱턴 D.C. 외곽, 포토맥 강 인근의 독립 보안 구역.\n\n겉모습:\n낮고 넓은 회색빛 복합 건물. 겉으로는 국제 행정기관이나 연구소처럼 보인다. 화려하진 않지만, 가까이 갈수록 아무나 들어갈 수 없는 기관이라는 압박감이 느껴진다.\n\n상징적 구조물:\n건물 중앙에는 검은 유리 타워인 블랙 코어 타워가 있다. 밖에서 보면 장식적인 중심 구조물처럼 보이지만, 실제로는 상임이사회가 사용하는 최고 보안 구역이다. N.E.B의 최종 의사결정과 비공개 회의가 이곳에서 이루어진다.\n\n층별 구조:\n\n1층-2층: 공식 출입 / 공동 행정 구역\n방문객 접수, 보안 검색, 국제 협력 창구, 공식 회의실이 있다. 시그마, 델타, 세타 모두 외부 기관과 만날 때 이용한다.\n\n3층-4층: 공동 업무 구역\n공용 회의실, 자료 열람실, 보고서 작성실, 휴게 라운지가 있다. 부서가 섞여 일하는 곳이라 정보가 오가고, 캐릭터끼리 마주치기 좋은 층이다.\n\n5층-6층: 세타 전용 구역\n정보 분석실, 사건 기록실, 능력자 데이터 분석실, 이상 사건 조사실이 있다. 조용하고 연구소 같은 분위기다.\n\n7층-8층: 델타 전용 구역\n작전 브리핑룸, 장비실, 무기 관리실, 대기실, 훈련 구역이 있다. 현장 요원들이 가장 자주 오가는 층이다.\n\n9층-10층: 시그마 전용 구역\n작전 승인실, 상황 통제실, 국제 공조 회의실, 지휘관 회의실이 있다. 권한이 높은 부서라 출입 절차가 가장 까다롭다.\n\n11층-12층: 공동 고위 회의 구역\n대형 작전 회의실, 국제 합동 브리핑룸, 비공개 협상실이 있다. 큰 사건이 터지면 시그마, 델타, 세타가 모두 이곳에 모인다.\n\n옥상 구역: 공동 제한 구역\n헬리패드, 통신 장비, 비상 대피 구역이 있다. 허가받은 인원만 쓸 수 있다.\n\n지하 1층: 공동 식당 / 휴게 구역\n직원 식당, 카페테리아, 작은 라운지가 있다. 부서 상관없이 모두 이용한다.\n\n지하 2층: 공동 의료 / 회복 구역\n응급 처치실, 회복실, 능력자 검사실이 있다. 전 부서 공용 의료 구역이다.\n\n지하 3층: 공동 차고 / 출동 구역\n공용 차량 차고, 장비 적재 구역, 비상 출입 통로가 있다. N.E.B 소속 부서들이 함께 이용한다."
+  },
   organization: [
     {
       id: "org-main",
@@ -180,6 +184,8 @@ const fields = {
   freeNotes: document.querySelector("#freeNotes")
 };
 
+const backgroundField = document.querySelector("#backgroundHeadquarters");
+
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
 }
@@ -196,6 +202,8 @@ function loadState() {
 }
 
 function migrateState(data) {
+  data.background = { ...clone(defaultData.background), ...(data.background || {}) };
+
   if (data.overview?.pendingSettings === "팀 이름\n유저의 입장\n초능력 규칙\n첫 사건") {
     data.overview.pendingSettings = defaultData.overview.pendingSettings;
   }
@@ -317,6 +325,14 @@ Object.entries(fields).forEach(([key, element]) => {
   });
 });
 
+if (backgroundField) {
+  backgroundField.value = state.background.headquarters || "";
+  backgroundField.addEventListener("input", () => {
+    state.background.headquarters = backgroundField.value;
+    persist();
+  });
+}
+
 document.querySelectorAll(".page-save-button").forEach((button) => {
   button.addEventListener("click", () => saveSection(button.dataset.saveSection));
 });
@@ -328,6 +344,7 @@ document.querySelector("#resetDataButton").addEventListener("click", () => {
   Object.entries(fields).forEach(([key, element]) => {
     element.value = state.overview[key] || "";
   });
+  if (backgroundField) backgroundField.value = state.background.headquarters || "";
   renderAll();
   persist();
 });

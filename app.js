@@ -35,12 +35,6 @@ const defaultData = {
       name: "세타",
       parentId: "org-main",
       description: "분석과 이상 사건 조사 부서. 정보, 연구, 정신계나 괴이 사건 해석을 맡는다."
-    },
-    {
-      id: "org-team",
-      name: "델타 소수 정예팀",
-      parentId: "org-delta",
-      description: "델타 산하 현장 전담팀 후보. 구체적인 인물과 이야기 시작점은 아직 정하지 않는다."
     }
   ],
   characters: [
@@ -148,7 +142,7 @@ function migrateState(data) {
   const organization = Array.isArray(data.organization) ? data.organization : [];
   const defaultsById = Object.fromEntries(defaultData.organization.map((org) => [org.id, org]));
 
-  ["org-main", "org-sigma", "org-delta", "org-theta", "org-team"].forEach((id) => {
+  ["org-main", "org-sigma", "org-delta", "org-theta"].forEach((id) => {
     if (!organization.some((org) => org.id === id)) {
       organization.push(clone(defaultsById[id]));
     }
@@ -160,20 +154,9 @@ function migrateState(data) {
     main.description = defaultsById["org-main"].description;
   }
 
-  const team = organization.find((org) => org.id === "org-team");
-  if (team) {
-    if (team.name === "주인공이 만나는 소수 정예 팀") {
-      team.name = defaultsById["org-team"].name;
-    }
-    if (team.description.includes("초반 이야기가 시작되는 팀")) {
-      team.description = defaultsById["org-team"].description;
-    }
-    if (team.parentId === "org-main") {
-      team.parentId = "org-delta";
-    }
-  }
-
-  data.organization = organization;
+  data.organization = organization.filter(
+    (org) => org.id !== "org-team" && org.name !== "주인공이 만나는 소수 정예 팀" && org.name !== "델타 소수 정예팀"
+  );
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   return data;
 }

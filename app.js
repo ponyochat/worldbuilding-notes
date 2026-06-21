@@ -413,10 +413,10 @@ document.querySelector("#addCharacterButton").addEventListener("click", () => {
     pending: "",
     tags: ""
   });
-  characterDialog.showModal();
+  openModal(characterDialog);
 });
 
-document.querySelector("#closeCharacterDialog").addEventListener("click", () => characterDialog.close());
+document.querySelector("#closeCharacterDialog").addEventListener("click", () => closeModal(characterDialog));
 document.querySelector("#characterSearch").addEventListener("input", renderCharacters);
 
 function renderCharacters() {
@@ -448,7 +448,7 @@ function renderCharacters() {
     `;
     card.querySelector("button").addEventListener("click", () => {
       fillCharacterForm(character);
-      characterDialog.showModal();
+      openModal(characterDialog);
     });
     grid.append(card);
   });
@@ -505,7 +505,7 @@ characterForm.addEventListener("submit", (event) => {
   if (index >= 0) state.characters[index] = character;
   else state.characters.push(character);
 
-  characterDialog.close();
+  closeModal(characterDialog);
   renderCharacters();
   persist();
 });
@@ -513,12 +513,12 @@ characterForm.addEventListener("submit", (event) => {
 document.querySelector("#deleteCharacterButton").addEventListener("click", () => {
   const id = document.querySelector("#characterId").value;
   if (!id) {
-    characterDialog.close();
+    closeModal(characterDialog);
     return;
   }
   if (!confirm("이 캐릭터를 삭제할까?")) return;
   state.characters = state.characters.filter((character) => character.id !== id);
-  characterDialog.close();
+  closeModal(characterDialog);
   renderCharacters();
   persist();
 });
@@ -537,10 +537,10 @@ document.querySelector("#addCaseButton").addEventListener("click", () => {
     status: "",
     hooks: ""
   });
-  caseDialog.showModal();
+  openModal(caseDialog);
 });
 
-document.querySelector("#closeCaseDialog").addEventListener("click", () => caseDialog.close());
+document.querySelector("#closeCaseDialog").addEventListener("click", () => closeModal(caseDialog));
 
 function renderCases() {
   const list = document.querySelector("#caseList");
@@ -563,7 +563,7 @@ function renderCases() {
     `;
     card.querySelector("button").addEventListener("click", () => {
       fillCaseForm(item);
-      caseDialog.showModal();
+      openModal(caseDialog);
     });
     list.append(card);
   });
@@ -598,7 +598,7 @@ caseForm.addEventListener("submit", (event) => {
   if (index >= 0) state.cases[index] = item;
   else state.cases.push(item);
 
-  caseDialog.close();
+  closeModal(caseDialog);
   renderCases();
   persist();
 });
@@ -606,15 +606,39 @@ caseForm.addEventListener("submit", (event) => {
 document.querySelector("#deleteCaseButton").addEventListener("click", () => {
   const id = document.querySelector("#caseId").value;
   if (!id) {
-    caseDialog.close();
+    closeModal(caseDialog);
     return;
   }
   if (!confirm("이 사건을 삭제할까?")) return;
   state.cases = state.cases.filter((item) => item.id !== id);
-  caseDialog.close();
+  closeModal(caseDialog);
   renderCases();
   persist();
 });
+
+function openModal(dialog) {
+  try {
+    if (typeof dialog.showModal === "function") {
+      dialog.showModal();
+    } else {
+      dialog.setAttribute("open", "");
+    }
+  } catch {
+    dialog.setAttribute("open", "");
+  }
+
+  dialog.classList.add("dialog-visible");
+  dialog.scrollTop = 0;
+}
+
+function closeModal(dialog) {
+  dialog.classList.remove("dialog-visible");
+  if (typeof dialog.close === "function" && dialog.open) {
+    dialog.close();
+  } else {
+    dialog.removeAttribute("open");
+  }
+}
 
 function renderTags(tags) {
   return String(tags || "")
@@ -626,11 +650,13 @@ function renderTags(tags) {
 }
 
 function setValue(selector, value) {
-  document.querySelector(selector).value = value || "";
+  const element = document.querySelector(selector);
+  if (element) element.value = value || "";
 }
 
 function getValue(selector) {
-  return document.querySelector(selector).value.trim();
+  const element = document.querySelector(selector);
+  return element ? element.value.trim() : "";
 }
 
 function escapeHtml(value) {

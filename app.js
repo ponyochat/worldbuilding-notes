@@ -65,21 +65,25 @@ const defaultData = {
       tags: "델타, 리더, 미국, 능력자, 스콜"
     },
     {
-      id: "char-field",
-      name: "현장 요원 캐릭터",
-      nation: "미정",
-      age: "미정",
-      affiliation: "소수 정예 팀",
-      role: "현장 요원",
-      powerStatus: "미정",
-      power: "아직 정하지 않음",
-      personality: "날카롭거나 장난기 있는 타입 후보.",
+      id: "char-gerard-winters",
+      name: "제라드 윈터스",
+      nation: "미국",
+      age: "31세",
+      affiliation: "N.E.B 델타",
+      role: "델타 방어/지원 요원",
+      powerStatus: "능력자",
+      power:
+        "능력명: 미정\n콜사인: 미정\n무기: 미정\n\n공기를 압축해 방어막과 공격을 만드는 능력.\n총격, 파편, 충격을 막는 투명한 공기 방벽을 만들 수 있고, 압축한 공기를 공기탄처럼 쏘아 적을 밀어내거나 제압할 수 있다.\n레온의 Wind Force와 연계하면 바람을 더 단단한 방벽이나 공격으로 바꿀 수 있다.",
+      personality:
+        "델타에서 가장 따뜻한 사람처럼 보이지만, 동시에 가장 단단하게 팀을 붙잡는 요원.\n다정하고 섬세한 성격이다.\n팀원들의 상태를 세심하게 살피며, 필요한 순간에는 기대게 해주는 사람이다.\n하지만 무조건 받아주기만 하는 타입은 아니고, 무리하거나 선을 넘는 행동에는 단호하다.",
       speech: "미정",
-      appearance: "미정",
+      appearance:
+        "키는 191cm.\n체형은 단단하고 균형 잡힌 근육질이다.\n큰 키와 반듯한 자세 때문에, 가만히 서 있어도 신뢰감이 느껴진다.\n머리는 애쉬 브라운 계열이며, 늘 깔끔하게 정돈되어 있다. 너무 딱딱하게 넘긴 스타일은 아니고, 자연스럽지만 흐트러짐이 적다.\n눈은 회색빛이 도는 푸른색이다. 눈매는 부드러운 편이라 첫인상이 차갑지 않다. 다만 집중할 때는 눈빛이 단단하게 가라앉는다.\n얼굴선은 깔끔하고 단정하다. 높은 콧대와 차분한 입매, 부드러운 눈매가 어울려 신뢰감 있는 인상을 준다. 화려하게 눈에 띄는 미남이라기보다는, 볼수록 안정감과 깊이가 느껴지는 얼굴이다.\n피부는 밝은 톤이고, 표정 변화가 섬세한 편이다. 상대의 말을 들을 때는 시선을 피하지 않고 차분히 바라보는 습관이 있다.\n복장은 전술복도 늘 단정하게 입는다. 장갑, 탄창, 장비 위치가 항상 정리되어 있고, 현장에 나가기 전에는 자기 장비를 조용히 확인하는 편이다.",
       relationship: "아직 특정 인물과의 관계는 정하지 않음.",
-      secret: "미정",
-      pending: "능력자 또는 비능력자 중 선택",
-      tags: "현장요원, 초반등장"
+      secret:
+        "과거:\n미정\n\n좋아하는 것:\n미정\n\n싫어하는 것:\n미정\n\n취미:\n미정\n\n특기:\n미정\n\n버릇:\n미정",
+      pending: "능력명, 콜사인, 무기, 과거 설정",
+      tags: "델타, 미국, 능력자, 방어, 지원"
     },
     {
       id: "char-support",
@@ -172,8 +176,11 @@ function migrateState(data) {
 
   const characters = Array.isArray(data.characters) ? data.characters : [];
   const leonDefault = clone(defaultData.characters.find((character) => character.id === "char-leon-walker"));
+  const gerardDefault = clone(defaultData.characters.find((character) => character.id === "char-gerard-winters"));
   const oldLeaderIndex = characters.findIndex((character) => character.id === "char-leader");
+  const oldFieldIndex = characters.findIndex((character) => character.id === "char-field");
   const leonIndex = characters.findIndex((character) => character.id === "char-leon-walker");
+  const gerardIndex = characters.findIndex((character) => character.id === "char-gerard-winters");
 
   if (leonIndex === -1) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
@@ -183,7 +190,18 @@ function migrateState(data) {
     characters[leonIndex].pending = leonDefault.pending;
   }
 
-  data.characters = characters.filter((character) => character.id !== "char-leader");
+  if (gerardIndex === -1) {
+    if (oldFieldIndex >= 0) characters[oldFieldIndex] = gerardDefault;
+    else characters.push(gerardDefault);
+  } else {
+    characters[gerardIndex].power = gerardDefault.power;
+    characters[gerardIndex].personality = gerardDefault.personality;
+    characters[gerardIndex].appearance = gerardDefault.appearance;
+    characters[gerardIndex].secret = gerardDefault.secret;
+    characters[gerardIndex].pending = gerardDefault.pending;
+  }
+
+  data.characters = characters.filter((character) => character.id !== "char-leader" && character.id !== "char-field");
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   return data;
 }

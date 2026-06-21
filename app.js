@@ -69,8 +69,7 @@ const defaultData = {
         "취미:\n총기 정비\n오래된 락 음악 듣기\n야간 드라이브\n바람 잘 드는 옥상에서 쉬기\n카드 섞기나 동전 굴리기 같은 손장난\n\n특기:\n현장 지휘\n사격\n팀원들의 버릇 파악\n바람으로 탄도와 시야를 보조하는 전투",
       habits:
         "생각할 때 총기 장갑 손목 부분을 만진다.\n불리한 상황일수록 더 느긋하게 말한다.\n바람 방향을 확인하듯 고개를 조금 기울인다.",
-      secret: "현재 확정된 비밀 설정은 없다.",
-      pending: "델타 합류 이후 주요 작전 기록",
+      extra: "",
       tags: "델타, 리더, 미국, 능력자, 스콜"
     },
     {
@@ -96,8 +95,7 @@ const defaultData = {
       dislikes: "단맛\n아픈 사람",
       hobbiesTalents: "취미:\n서점 구경\n\n특기:\n요리",
       habits: "미정",
-      secret: "미정",
-      pending: "능력명, 콜사인, 무기, 과거 설정",
+      extra: "",
       tags: "델타, 미국, 능력자, 방어, 지원"
     },
     {
@@ -123,8 +121,7 @@ const defaultData = {
       dislikes: "개를 무서워한다\n잔소리\n가만히 대기하는 시간\n복잡한 서류 작업\n쓴 커피",
       hobbiesTalents: "취미:\n액션 게임\n축구\n운동화 모으기\n\n특기:\n근접 돌파\n순간 판단\n불꽃 추진을 이용한 고속 이동",
       habits: "흥분하면 말이 빨라진다.\n불꽃을 손끝에 작게 튕기며 논다.",
-      secret: "미정",
-      pending: "비밀 설정",
+      extra: "",
       tags: "델타, 막내, 능력자, 불, 돌격, 러키"
     },
     {
@@ -150,8 +147,7 @@ const defaultData = {
       dislikes: "먼지\n시끄러운 것",
       hobbiesTalents: "취미:\n시계 분해와 조립\n금속 퍼즐\n조용한 바에서 맥주 마시기\n\n특기:\n청소",
       habits: "생각할 때 이어커프를 손끝으로 만진다.\n누군가 큰 소리로 말하면 눈썹이 아주 살짝 찌푸려진다.",
-      secret: "미정",
-      pending: "비밀 설정",
+      extra: "",
       tags: "델타, 독일, 능력자, 기계, 폭발물, 냉정"
     }
   ],
@@ -251,8 +247,7 @@ function migrateState(data) {
     characters[leonIndex].dislikes = leonDefault.dislikes;
     characters[leonIndex].hobbiesTalents = leonDefault.hobbiesTalents;
     characters[leonIndex].habits = leonDefault.habits;
-    characters[leonIndex].secret = leonDefault.secret;
-    characters[leonIndex].pending = leonDefault.pending;
+    characters[leonIndex].extra = leonDefault.extra;
   }
 
   if (gerardIndex === -1) {
@@ -268,8 +263,7 @@ function migrateState(data) {
     characters[gerardIndex].dislikes = gerardDefault.dislikes;
     characters[gerardIndex].hobbiesTalents = gerardDefault.hobbiesTalents;
     characters[gerardIndex].habits = gerardDefault.habits;
-    characters[gerardIndex].secret = gerardDefault.secret;
-    characters[gerardIndex].pending = gerardDefault.pending;
+    characters[gerardIndex].extra = gerardDefault.extra;
   }
 
   if (luckyIndex === -1) {
@@ -472,8 +466,7 @@ document.querySelector("#addCharacterButton").addEventListener("click", () => {
     dislikes: "",
     hobbiesTalents: "",
     habits: "",
-    secret: "",
-    pending: "",
+    extra: "",
     tags: ""
   });
   openModal(characterDialog);
@@ -536,8 +529,7 @@ function fillCharacterForm(character) {
   setValue("#characterDislikes", character.dislikes);
   setValue("#characterHobbiesTalents", character.hobbiesTalents);
   setValue("#characterHabits", character.habits);
-  setValue("#characterSecret", character.secret);
-  setValue("#characterPending", character.pending);
+  setValue("#characterExtra", character.extra);
   setValue("#characterTags", character.tags);
 }
 
@@ -562,8 +554,7 @@ characterForm.addEventListener("submit", (event) => {
     dislikes: getValue("#characterDislikes"),
     hobbiesTalents: getValue("#characterHobbiesTalents"),
     habits: getValue("#characterHabits"),
-    secret: getValue("#characterSecret"),
-    pending: getValue("#characterPending"),
+    extra: getValue("#characterExtra"),
     tags: getValue("#characterTags")
   };
 

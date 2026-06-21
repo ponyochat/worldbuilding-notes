@@ -136,7 +136,7 @@ const defaultData = {
     },
     {
       id: "char-delta-mechanic",
-      name: "마틴 슈타인",
+      name: "렌 하르트",
       nation: "독일",
       age: "29세",
       affiliation: "N.E.B 델타",
@@ -152,7 +152,7 @@ const defaultData = {
       appearance:
         "키는 193cm.\n체형은 마른 근육질이고, 팔다리가 길어 움직임이 조용하고 절제되어 있다.\n머리는 플래티넘 블론드의 긴 머리다. 평소에는 목 뒤에서 느슨하게 묶고 다닌다. 흐트러짐 없는 전술복과 달리 머리만은 조금 느슨하게 묶여 있어, 차가운 인상에 묘한 여유를 더한다.\n눈은 선명한 녹색이다. 차분하고 날카로운 시선 때문에, 말없이 바라보기만 해도 쉽게 긴장감을 준다.\n오른쪽 귀에는 작은 검은색 이어커프를 하고 있다. 장식처럼 보이지만 실제로는 통신 장비와 연결된 개인 장비다.\n손가락이 길고 손끝이 예민하다. 폭발물 해체나 장비 조작을 할 때 손 움직임이 거의 흔들리지 않는다.\n얼굴선은 날카롭고 깨끗하다. 높은 콧대와 얇은 입술, 감정이 잘 드러나지 않는 표정 때문에 쉽게 다가가기 어려워 보인다.\n전술복은 늘 완벽하게 정리되어 있다. 소매 안쪽이나 장갑 안에는 직접 개조한 작은 도구들을 숨겨둔다.",
       background:
-        "독일 특수 기술부대 출신. 과거 테러 사건에서 여동생을 잃었다. 현장에는 복잡한 폭발 장치와 원격 제어 장비가 설치되어 있었고, 마틴은 장치의 구조를 읽어냈지만 도착이 너무 늦었다. 이후 같은 방식의 사건을 막기 위해 기계 장치와 폭발물에 집착하게 되었고, N.E.B에 합류했다.",
+        "독일 특수 기술부대 출신. 과거 테러 사건에서 여동생을 잃었다. 현장에는 복잡한 폭발 장치와 원격 제어 장비가 설치되어 있었고, 렌은 장치의 구조를 읽어냈지만 도착이 너무 늦었다. 이후 같은 방식의 사건을 막기 위해 기계 장치와 폭발물에 집착하게 되었고, N.E.B에 합류했다.",
       likes: "차가운 맥주\n작고 귀여운 것",
       dislikes: "먼지\n시끄러운 것",
       hobbiesTalents: "취미:\n시계 분해와 조립\n금속 퍼즐\n조용한 바에서 맥주 마시기\n\n특기:\n청소",
@@ -180,6 +180,27 @@ const defaultData = {
       habits: "",
       extra: "성별: 남자",
       tags: "이오타, 의료지원팀, 의사, 남자"
+    },
+    {
+      id: "char-martin-holloway",
+      name: "마틴 홀로웨이",
+      nation: "미국",
+      age: "35세",
+      affiliation: "N.E.B 상임이사회",
+      role: "N.E.B 상임이사회 의장",
+      powerStatus: "",
+      power: "",
+      callsign: "",
+      personality: "",
+      speech: "",
+      appearance: "",
+      background: "",
+      likes: "",
+      dislikes: "",
+      hobbiesTalents: "",
+      habits: "",
+      extra: "성별: 남자\n상임이사회의 최고권위자.",
+      tags: "상임이사회, 의장, 미국, 남자"
     }
   ],
   cases: [
@@ -269,6 +290,7 @@ function migrateState(data) {
   const luckyDefault = clone(defaultData.characters.find((character) => character.id === "char-support"));
   const mechanicDefault = clone(defaultData.characters.find((character) => character.id === "char-delta-mechanic"));
   const doctorSloanDefault = clone(defaultData.characters.find((character) => character.id === "char-doctor-sloan"));
+  const martinHollowayDefault = clone(defaultData.characters.find((character) => character.id === "char-martin-holloway"));
   const oldLeaderIndex = characters.findIndex((character) => character.id === "char-leader");
   const oldFieldIndex = characters.findIndex((character) => character.id === "char-field");
   const leonIndex = characters.findIndex((character) => character.id === "char-leon-walker");
@@ -276,6 +298,7 @@ function migrateState(data) {
   const luckyIndex = characters.findIndex((character) => character.id === "char-support");
   const mechanicIndex = characters.findIndex((character) => character.id === "char-delta-mechanic");
   const doctorSloanIndex = characters.findIndex((character) => character.id === "char-doctor-sloan");
+  const martinHollowayIndex = characters.findIndex((character) => character.id === "char-martin-holloway");
 
   if (leonIndex === -1) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
@@ -325,6 +348,12 @@ function migrateState(data) {
     characters.push(doctorSloanDefault);
   } else {
     characters[doctorSloanIndex] = doctorSloanDefault;
+  }
+
+  if (martinHollowayIndex === -1) {
+    characters.push(martinHollowayDefault);
+  } else {
+    characters[martinHollowayIndex] = martinHollowayDefault;
   }
 
   data.characters = characters.filter((character) => character.id !== "char-leader" && character.id !== "char-field");

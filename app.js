@@ -59,8 +59,16 @@ const defaultData = {
       appearance:
         "키는 192cm로 크고, 체형은 늘씬하지만 힘이 느껴지는 근육질이다.\n넓은 어깨와 긴 팔다리 때문에 전술복을 입어도 실루엣이 깔끔하게 드러난다.\n머리는 자연스러운 흑발이다. 너무 단정하게 넘기기보다는 살짝 흐트러진 스타일이라, 항상 막 임무에서 돌아온 것 같은 나른한 분위기가 있다.\n눈은 짙은 검은색에 가깝고, 눈매는 살짝 내려간 듯 여유롭다. 평소에는 졸린 듯 웃고 있지만, 현장에서는 눈빛이 차갑게 가라앉아 전혀 다른 사람처럼 보인다.\n얼굴선은 뚜렷하고 남성적이다. 높은 콧대, 선명한 턱선, 얇게 웃는 입매가 특징이다. 가볍게 웃을 때는 장난스러운데, 표정이 사라지면 꽤 위압감이 있다.\n피부는 건강한 밝은 톤이고, 왼쪽 눈썹 근처에 아주 옅은 흉터가 있다. 흉터가 크지는 않지만 가까이 보면 눈에 띄어서, 그가 단순히 책상 앞 지휘관이 아니라 현장을 오래 뛴 사람이라는 인상을 준다.\n복장은 보통 검은 전술복에 가벼운 재킷을 걸친다. 장비를 과하게 달고 다니지 않고, 커스텀 카빈 소총 하나만 자연스럽게 멘다. 전체적으로 정돈되어 있지만 일부러 완벽하게 갖춰 입지는 않는 타입이다.",
       relationship: "아직 특정 인물과의 관계는 정하지 않음.",
-      secret:
-        "과거:\n미군 특수부대 출신. 국제 인질 구출 작전 중 능력자 범죄 조직과 충돌했고, 그 작전에서 팀 대부분을 잃었다. 이후 국가 단위의 군대로는 특수범죄를 막을 수 없다고 판단해 N.E.B에 합류했다.\n\n좋아하는 것:\n진한 블랙커피\n새벽 공기\n농담을 받아치는 사람\n작전 끝난 뒤 조용한 술 한 잔\n\n싫어하는 것:\n무의미한 희생\n책임을 아랫사람에게 떠넘기는 상관\n민간인을 방패로 쓰는 범죄자\n과하게 형식적인 회의\n밀폐된 공간\n\n취미:\n총기 정비\n오래된 락 음악 듣기\n야간 드라이브\n바람 잘 드는 옥상에서 쉬기\n카드 섞기나 동전 굴리기 같은 손장난\n\n특기:\n현장 지휘\n사격\n팀원들의 버릇 파악\n바람으로 탄도와 시야를 보조하는 전투\n\n버릇:\n생각할 때 총기 장갑 손목 부분을 만진다.\n불리한 상황일수록 더 느긋하게 말한다.\n바람 방향을 확인하듯 고개를 조금 기울인다.",
+      background:
+        "미군 특수부대 출신. 국제 인질 구출 작전 중 능력자 범죄 조직과 충돌했고, 그 작전에서 팀 대부분을 잃었다. 이후 국가 단위의 군대로는 특수범죄를 막을 수 없다고 판단해 N.E.B에 합류했다.",
+      likes: "진한 블랙커피\n새벽 공기\n농담을 받아치는 사람\n작전 끝난 뒤 조용한 술 한 잔",
+      dislikes:
+        "무의미한 희생\n책임을 아랫사람에게 떠넘기는 상관\n민간인을 방패로 쓰는 범죄자\n과하게 형식적인 회의\n밀폐된 공간",
+      hobbiesTalents:
+        "취미:\n총기 정비\n오래된 락 음악 듣기\n야간 드라이브\n바람 잘 드는 옥상에서 쉬기\n카드 섞기나 동전 굴리기 같은 손장난\n\n특기:\n현장 지휘\n사격\n팀원들의 버릇 파악\n바람으로 탄도와 시야를 보조하는 전투",
+      habits:
+        "생각할 때 총기 장갑 손목 부분을 만진다.\n불리한 상황일수록 더 느긋하게 말한다.\n바람 방향을 확인하듯 고개를 조금 기울인다.",
+      secret: "미정",
       pending: "이름 표기 세부 확정",
       tags: "델타, 리더, 미국, 능력자, 스콜"
     },
@@ -80,8 +88,12 @@ const defaultData = {
       appearance:
         "키는 191cm.\n체형은 단단하고 균형 잡힌 근육질이다.\n큰 키와 반듯한 자세 때문에, 가만히 서 있어도 신뢰감이 느껴진다.\n머리는 애쉬 브라운 계열이며, 늘 깔끔하게 정돈되어 있다. 너무 딱딱하게 넘긴 스타일은 아니고, 자연스럽지만 흐트러짐이 적다.\n눈은 회색빛이 도는 푸른색이다. 눈매는 부드러운 편이라 첫인상이 차갑지 않다. 다만 집중할 때는 눈빛이 단단하게 가라앉는다.\n얼굴선은 깔끔하고 단정하다. 높은 콧대와 차분한 입매, 부드러운 눈매가 어울려 신뢰감 있는 인상을 준다. 화려하게 눈에 띄는 미남이라기보다는, 볼수록 안정감과 깊이가 느껴지는 얼굴이다.\n피부는 밝은 톤이고, 표정 변화가 섬세한 편이다. 상대의 말을 들을 때는 시선을 피하지 않고 차분히 바라보는 습관이 있다.\n복장은 전술복도 늘 단정하게 입는다. 장갑, 탄창, 장비 위치가 항상 정리되어 있고, 현장에 나가기 전에는 자기 장비를 조용히 확인하는 편이다.",
       relationship: "아직 특정 인물과의 관계는 정하지 않음.",
-      secret:
-        "과거:\n미정\n\n좋아하는 것:\n미정\n\n싫어하는 것:\n미정\n\n취미:\n미정\n\n특기:\n미정\n\n버릇:\n미정",
+      background: "미정",
+      likes: "미정",
+      dislikes: "미정",
+      hobbiesTalents: "미정",
+      habits: "미정",
+      secret: "미정",
       pending: "능력명, 콜사인, 무기, 과거 설정",
       tags: "델타, 미국, 능력자, 방어, 지원"
     },
@@ -186,6 +198,13 @@ function migrateState(data) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
     else characters.unshift(leonDefault);
   } else {
+    characters[leonIndex].personality = leonDefault.personality;
+    characters[leonIndex].appearance = leonDefault.appearance;
+    characters[leonIndex].background = leonDefault.background;
+    characters[leonIndex].likes = leonDefault.likes;
+    characters[leonIndex].dislikes = leonDefault.dislikes;
+    characters[leonIndex].hobbiesTalents = leonDefault.hobbiesTalents;
+    characters[leonIndex].habits = leonDefault.habits;
     characters[leonIndex].secret = leonDefault.secret;
     characters[leonIndex].pending = leonDefault.pending;
   }
@@ -197,6 +216,11 @@ function migrateState(data) {
     characters[gerardIndex].power = gerardDefault.power;
     characters[gerardIndex].personality = gerardDefault.personality;
     characters[gerardIndex].appearance = gerardDefault.appearance;
+    characters[gerardIndex].background = gerardDefault.background;
+    characters[gerardIndex].likes = gerardDefault.likes;
+    characters[gerardIndex].dislikes = gerardDefault.dislikes;
+    characters[gerardIndex].hobbiesTalents = gerardDefault.hobbiesTalents;
+    characters[gerardIndex].habits = gerardDefault.habits;
     characters[gerardIndex].secret = gerardDefault.secret;
     characters[gerardIndex].pending = gerardDefault.pending;
   }
@@ -384,6 +408,11 @@ document.querySelector("#addCharacterButton").addEventListener("click", () => {
     speech: "",
     appearance: "",
     relationship: "",
+    background: "",
+    likes: "",
+    dislikes: "",
+    hobbiesTalents: "",
+    habits: "",
     secret: "",
     pending: "",
     tags: ""
@@ -442,6 +471,11 @@ function fillCharacterForm(character) {
   setValue("#characterSpeech", character.speech);
   setValue("#characterAppearance", character.appearance);
   setValue("#characterRelationship", character.relationship);
+  setValue("#characterBackground", character.background);
+  setValue("#characterLikes", character.likes);
+  setValue("#characterDislikes", character.dislikes);
+  setValue("#characterHobbiesTalents", character.hobbiesTalents);
+  setValue("#characterHabits", character.habits);
   setValue("#characterSecret", character.secret);
   setValue("#characterPending", character.pending);
   setValue("#characterTags", character.tags);
@@ -463,6 +497,11 @@ characterForm.addEventListener("submit", (event) => {
     speech: getValue("#characterSpeech"),
     appearance: getValue("#characterAppearance"),
     relationship: getValue("#characterRelationship"),
+    background: getValue("#characterBackground"),
+    likes: getValue("#characterLikes"),
+    dislikes: getValue("#characterDislikes"),
+    hobbiesTalents: getValue("#characterHobbiesTalents"),
+    habits: getValue("#characterHabits"),
     secret: getValue("#characterSecret"),
     pending: getValue("#characterPending"),
     tags: getValue("#characterTags")

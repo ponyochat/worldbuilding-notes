@@ -382,21 +382,6 @@ textarea {
   line-height: 1.5;
 }
 
-.tag-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.tag {
-  padding: 5px 8px;
-  border-radius: 999px;
-  background: var(--panel-soft);
-  color: var(--accent-dark);
-  font-size: 12px;
-  font-weight: 800;
-}
-
 .case-list {
   display: grid;
   gap: 14px;

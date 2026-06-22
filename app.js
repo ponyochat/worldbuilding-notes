@@ -228,6 +228,32 @@ const defaultData = {
       habits: "",
       extra: "성별: 남자",
       tags: "시그마, 비서실장, 비능력자, 천재, 독설가, 협상"
+    },
+    {
+      id: "char-marcus-black",
+      name: "마커스 블랙",
+      nation: "",
+      age: "30세",
+      affiliation: "N.E.B 시그마",
+      role: "보좌관 / 전투담당",
+      powerStatus: "능력자",
+      power:
+        "능력명: Iron Pulse / 아이언 펄스\n무기: 너클\n\n자신의 근육과 뼈, 피부의 밀도를 순간적으로 끌어올리는 능력. 공격할 때는 주먹의 충격이 무겁게 실리고, 방어할 때는 몸이 강철처럼 단단해진다.\n\n너클과 함께 사용하면 짧은 한 방만으로도 콘크리트를 금가게 만들 수 있다. 속도보다 무게와 압박감으로 상대를 무너뜨리는 근접전 특화 능력이다.",
+      callsign:
+        "콜네임: Knight / 나이트\n뜻: 기사\n\n마틴의 명령을 말없이 따르고 현장에서 그를 지키는 모습 때문에 붙은 콜네임. 시그마 안에서는 마틴의 검이자 방패 같은 존재로 여겨진다.",
+      personality:
+        "마틴의 보좌관이자 시그마의 전투담당. 현장에서 마틴을 호위하고, 직접 제압이 필요한 상황에서는 가장 먼저 투입된다.\n\n과묵하고 감정 표현이 적다. 필요한 말만 짧게 하고, 대부분의 상황을 행동으로 처리한다.\n\n마틴의 명령에는 절대적으로 따른다. 명령이 떨어지기 전까지는 움직이지 않지만, 한 번 움직이면 망설임 없이 상대를 제압한다.\n\n말수는 적지만 주변을 세심하게 살피는 편이라, 마틴이나 시그마 요원들이 위험해지기 전에 먼저 반응한다.",
+      speech: "",
+      appearance:
+        "30세 남성. 키 194cm. 덩치가 큰 근육질 체형으로, 넓은 어깨와 두꺼운 팔, 단단한 목선 때문에 가만히 서 있어도 위압감이 있다.\n\n머리는 짧게 자른 흑발이고, 눈은 깊은 검은색이다. 표정 변화가 거의 없어 무뚝뚝해 보이지만, 시선은 늘 차분하게 주변을 살핀다.",
+      background:
+        "과거 범죄 조직이 운영하던 불법 격투장에서 싸우던 능력자였다. 아이언 펄스와 타고난 격투 실력 때문에 그는 오랫동안 조직의 무기처럼 이용당했다.\n\nN.E.B 작전 중 마틴 홀로웨이는 마커스를 체포 대상이 아니라 구출 대상으로 판단했고, 작전 목표를 바꿔 그를 빼냈다. 이후 마커스는 시그마에 들어와 마틴의 보좌관이 되었고, 자신을 처음으로 사람으로 봐준 마틴에게 절대적인 충성을 바치게 되었다.",
+      likes: "작은 화분\n산책",
+      dislikes: "도박",
+      hobbiesTalents: "취미:\n화분 기르기\n\n특기:\n권투\n격투기",
+      habits: "",
+      extra: "성별: 남자",
+      tags: "시그마, 보좌관, 전투담당, 능력자, 아이언 펄스, 나이트"
     }
   ],
   cases: [
@@ -319,6 +345,7 @@ function migrateState(data) {
   const doctorSloanDefault = clone(defaultData.characters.find((character) => character.id === "char-doctor-sloan"));
   const martinHollowayDefault = clone(defaultData.characters.find((character) => character.id === "char-martin-holloway"));
   const adrianValeDefault = clone(defaultData.characters.find((character) => character.id === "char-adrian-vale"));
+  const marcusBlackDefault = clone(defaultData.characters.find((character) => character.id === "char-marcus-black"));
   const oldLeaderIndex = characters.findIndex((character) => character.id === "char-leader");
   const oldFieldIndex = characters.findIndex((character) => character.id === "char-field");
   const leonIndex = characters.findIndex((character) => character.id === "char-leon-walker");
@@ -328,6 +355,7 @@ function migrateState(data) {
   const doctorSloanIndex = characters.findIndex((character) => character.id === "char-doctor-sloan");
   const martinHollowayIndex = characters.findIndex((character) => character.id === "char-martin-holloway");
   const adrianValeIndex = characters.findIndex((character) => character.id === "char-adrian-vale");
+  const marcusBlackIndex = characters.findIndex((character) => character.id === "char-marcus-black");
 
   if (leonIndex === -1) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
@@ -389,6 +417,12 @@ function migrateState(data) {
     characters.push(adrianValeDefault);
   } else {
     characters[adrianValeIndex] = adrianValeDefault;
+  }
+
+  if (marcusBlackIndex === -1) {
+    characters.push(marcusBlackDefault);
+  } else {
+    characters[marcusBlackIndex] = marcusBlackDefault;
   }
 
   data.characters = characters.filter((character) => character.id !== "char-leader" && character.id !== "char-field");

@@ -199,11 +199,35 @@ const defaultData = {
         "35세 남성. 키 188cm, 마른 근육형 체형에 자세가 곧다.\n\n짙은 밤색 머리에 은빛이 살짝 섞여 있고, 오른쪽 앞머리 한 가닥이 자주 이마로 떨어진다. 눈은 옅은 회갈색이며, 웃을 때는 부드럽지만 오래 보면 차갑다.\n\n왼쪽 입가 아래에 작은 점이 있다. 손가락이 길고 마른 편이며, 지시를 내릴 때 손끝으로 책상이나 서류를 가볍게 두드리는 버릇이 있다.\n\n주로 짙은 회색 정장과 검은 긴 코트, 어두운 와인색 넥타이를 착용한다.",
       background: "",
       likes: "튀김우동\n녹차\n과자",
-      dislikes: "자신의 명령 불복종",
+      dislikes: "에드리언의 잔소리",
       hobbiesTalents: "",
       habits: "",
       extra: "성별: 남자\n시그마의 국장.",
       tags: "시그마, 국장, 미국, 남자, 능력자, 복종"
+    },
+    {
+      id: "char-adrian-vale",
+      name: "에드리언 베일",
+      nation: "",
+      age: "32세",
+      affiliation: "N.E.B 시그마",
+      role: "비서실장",
+      powerStatus: "비능력자",
+      power: "",
+      callsign: "",
+      personality:
+        "마틴의 비서실장이자 시그마의 작전 조율 담당. 마틴의 명령을 실행 계획으로 정리해 델타와 세타에 전달한다.\n\n작전 중에는 통신망을 통해 현장 상황을 파악하고, 변수에 맞춰 지시를 조정해 각 부서에 전달한다. 협상이나 외부 기관 대응이 필요한 경우에는 마틴을 대신해 실무 협상을 맡는다.\n\n능력자는 아니지만 뛰어난 두뇌와 냉정한 판단력으로 시그마의 작전이 흐트러지지 않게 만든다.\n\n냉정하고 차가운 천재형 인물. 감정 표현이 적고, 말투가 날카로우며 독설을 자주 한다. 상대가 누구든 비효율적이거나 무능하다고 판단하면 망설이지 않고 지적한다.\n\n마틴에게 절대적으로 충성하며, 그의 명령과 판단을 누구보다 정확히 이해한다. 다만 마틴이 사소한 실수를 하거나 허술한 모습을 보이면 차갑게 잔소리하면서도 결국 전부 챙겨준다.\n\n겉으로는 무정해 보이지만, 마틴에게는 은근히 마음이 약하다.",
+      speech: "",
+      appearance:
+        "깔끔하게 뒤로 넘긴 금발과 선명한 파란 눈을 가진 미남. 전체적으로 차갑고 단정한 인상이 강하다.\n\n얼굴선은 날카롭고, 표정 변화가 적어 쉽게 다가가기 어렵다. 늘 흐트러짐 없는 정장 차림이며, 작은 구김이나 어긋난 넥타이도 그냥 넘기지 않는다.",
+      background:
+        "과거 N.E.B 외부 협력기관의 정보 분석관이었다. 능력자는 아니었지만 사건 자료를 읽는 속도와 판단력이 뛰어나 여러 고위험 사건에 자문으로 투입되었다.\n\n한 비공개 작전에서 상부의 잘못된 판단으로 희생될 뻔했으나, 마틴 홀로웨이가 작전 지휘를 뒤집어 그를 살려냈다. 이후 에드리언은 마틴의 판단을 절대적으로 신뢰하게 되었고, 시그마로 들어와 그의 비서실장이 되었다.",
+      likes: "마틴 보살피기\n와인\n샐러드",
+      dislikes: "마틴이 실수하는 것\n기름진 음식",
+      hobbiesTalents: "",
+      habits: "",
+      extra: "성별: 남자",
+      tags: "시그마, 비서실장, 비능력자, 천재, 독설가, 협상"
     }
   ],
   cases: [
@@ -294,6 +318,7 @@ function migrateState(data) {
   const mechanicDefault = clone(defaultData.characters.find((character) => character.id === "char-delta-mechanic"));
   const doctorSloanDefault = clone(defaultData.characters.find((character) => character.id === "char-doctor-sloan"));
   const martinHollowayDefault = clone(defaultData.characters.find((character) => character.id === "char-martin-holloway"));
+  const adrianValeDefault = clone(defaultData.characters.find((character) => character.id === "char-adrian-vale"));
   const oldLeaderIndex = characters.findIndex((character) => character.id === "char-leader");
   const oldFieldIndex = characters.findIndex((character) => character.id === "char-field");
   const leonIndex = characters.findIndex((character) => character.id === "char-leon-walker");
@@ -302,6 +327,7 @@ function migrateState(data) {
   const mechanicIndex = characters.findIndex((character) => character.id === "char-delta-mechanic");
   const doctorSloanIndex = characters.findIndex((character) => character.id === "char-doctor-sloan");
   const martinHollowayIndex = characters.findIndex((character) => character.id === "char-martin-holloway");
+  const adrianValeIndex = characters.findIndex((character) => character.id === "char-adrian-vale");
 
   if (leonIndex === -1) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
@@ -357,6 +383,12 @@ function migrateState(data) {
     characters.push(martinHollowayDefault);
   } else {
     characters[martinHollowayIndex] = martinHollowayDefault;
+  }
+
+  if (adrianValeIndex === -1) {
+    characters.push(adrianValeDefault);
+  } else {
+    characters[adrianValeIndex] = adrianValeDefault;
   }
 
   data.characters = characters.filter((character) => character.id !== "char-leader" && character.id !== "char-field");

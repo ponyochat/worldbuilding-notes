@@ -254,6 +254,32 @@ const defaultData = {
       habits: "",
       extra: "성별: 남자",
       tags: "시그마, 보좌관, 전투담당, 능력자, 아이언 펄스, 나이트"
+    },
+    {
+      id: "char-lily",
+      name: "릴리",
+      nation: "영국",
+      age: "19세",
+      affiliation: "N.E.B 시그마",
+      role: "이상대응관 / 막내 요원",
+      powerStatus: "능력자",
+      power:
+        "능력명: Black Hunger / 블랙 헝거\n\n몸 안에 정체를 알 수 없는 사역마를 품고 있으며, 필요할 때 그 존재를 해방해 전투한다.\n\n평소에는 사역마의 힘을 억누르고 있어 겁 많고 소심한 모습이지만, 해방하면 성숙한 여성의 모습으로 변하고 성격도 완전히 달라진다. 이 상태에서는 사역마의 검은 그림자가 살아 움직이며 공격, 방어막, 구조물, 능력의 잔재까지 물어뜯어 삼킨다.\n\n먹어치운 힘은 잠시 그녀의 신체 능력과 재생력으로 전환되어, 싸울수록 더 강해지는 괴물 같은 전투 방식을 만든다.",
+      callsign:
+        "콜네임: Lilith / 릴리스\n\n평소 이름인 릴리와 연결되지만, 해방 상태의 성숙하고 위험한 분위기를 담은 콜네임이다.",
+      personality:
+        "시그마의 막내 요원이자 이상대응 담당. 평소에는 현장 경험이 부족해 보이지만, 일반적인 능력자 사건보다 괴이하거나 설명하기 어려운 사건에 투입된다.\n\n평소에는 얌전하고 겁이 많으며 소심하다. 사람 많은 곳을 어려워하고, 말을 걸면 당황하거나 눈을 피한다. 사회성이 부족해 팀원들과 어울리는 데도 시간이 걸린다.\n\n하지만 사역마를 해방하면 성격이 180도 바뀐다. 자신감이 넘치고 도발적이며, 전투를 두려워하지 않는다. 상대를 내려다보는 듯한 여유가 있고, 위험한 상황에서도 웃는다.\n\n마틴을 절대적으로 신뢰하며, 그의 명령 없이는 사역마를 함부로 해방하지 않는다.",
+      speech: "",
+      appearance:
+        "평소에는 작고 여린 인상의 19세 소녀. 표정이 자주 굳어 있고, 어깨를 움츠리는 버릇이 있다.\n\n해방 상태에 들어가면 성숙한 여성의 모습으로 변한다. 눈빛과 분위기가 완전히 달라지고, 압도적인 존재감 때문에 주변 공기가 무겁게 느껴진다.\n\n사역마는 인간의 형체가 거의 없는 거대한 검은 괴물이다. 여러 개의 눈과 갈라진 입, 뼈처럼 마른 긴 팔을 가졌으며, 몸은 그림자와 진흙이 뒤섞인 것처럼 일렁인다.\n\n해방 상태의 그녀는 성숙한 여성의 모습이 되지만, 발밑 그림자에는 사역마의 본체가 희미하게 따라붙는다.",
+      background:
+        "몸 안의 사역마 때문에 어린 시절부터 가족에게도 두려움의 대상이었다. 사역마가 한 번 폭주한 뒤, 그녀는 보호라는 이름으로 연구기관에 넘겨졌다.\n\n그곳에서 그녀는 사람으로 대우받지 못했다. 사역마를 꺼내기 위한 실험이 반복되었고, 실패할 때마다 그녀의 몸과 정신만 망가졌다. 결국 그녀는 자신이 괴물이라고 믿게 되었다.\n\nN.E.B가 연구기관을 급습했을 때, 현장에 있던 사람들은 그녀를 제거해야 할 위험물로 분류했다. 하지만 마틴 홀로웨이만은 그 결정을 거부했고, 그녀를 직접 데리고 나왔다.\n\n그날 이후 그녀는 마틴을 자신의 목숨을 맡길 수 있는 유일한 사람으로 여기게 되었다. 시그마에 들어온 뒤에도 마틴의 명령 없이는 사역마를 해방하지 않는다.",
+      likes: "",
+      dislikes: "",
+      hobbiesTalents: "",
+      habits: "",
+      extra: "성별: 여자",
+      tags: "시그마, 막내, 영국, 능력자, 사역마, 블랙 헝거, 릴리스"
     }
   ],
   cases: [
@@ -346,6 +372,7 @@ function migrateState(data) {
   const martinHollowayDefault = clone(defaultData.characters.find((character) => character.id === "char-martin-holloway"));
   const adrianValeDefault = clone(defaultData.characters.find((character) => character.id === "char-adrian-vale"));
   const marcusBlackDefault = clone(defaultData.characters.find((character) => character.id === "char-marcus-black"));
+  const lilyDefault = clone(defaultData.characters.find((character) => character.id === "char-lily"));
   const oldLeaderIndex = characters.findIndex((character) => character.id === "char-leader");
   const oldFieldIndex = characters.findIndex((character) => character.id === "char-field");
   const leonIndex = characters.findIndex((character) => character.id === "char-leon-walker");
@@ -356,6 +383,7 @@ function migrateState(data) {
   const martinHollowayIndex = characters.findIndex((character) => character.id === "char-martin-holloway");
   const adrianValeIndex = characters.findIndex((character) => character.id === "char-adrian-vale");
   const marcusBlackIndex = characters.findIndex((character) => character.id === "char-marcus-black");
+  const lilyIndex = characters.findIndex((character) => character.id === "char-lily");
 
   if (leonIndex === -1) {
     if (oldLeaderIndex >= 0) characters[oldLeaderIndex] = leonDefault;
@@ -423,6 +451,12 @@ function migrateState(data) {
     characters.push(marcusBlackDefault);
   } else {
     characters[marcusBlackIndex] = marcusBlackDefault;
+  }
+
+  if (lilyIndex === -1) {
+    characters.push(lilyDefault);
+  } else {
+    characters[lilyIndex] = lilyDefault;
   }
 
   data.characters = characters.filter((character) => character.id !== "char-leader" && character.id !== "char-field");

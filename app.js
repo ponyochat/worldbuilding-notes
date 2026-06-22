@@ -186,8 +186,8 @@ const defaultData = {
       name: "마틴 홀로웨이",
       nation: "미국",
       age: "35세",
-      affiliation: "N.E.B 상임이사회",
-      role: "N.E.B 상임이사회 의장",
+      affiliation: "N.E.B 시그마",
+      role: "국장",
       powerStatus: "",
       power: "",
       callsign: "",
@@ -199,8 +199,8 @@ const defaultData = {
       dislikes: "",
       hobbiesTalents: "",
       habits: "",
-      extra: "성별: 남자\n상임이사회의 최고권위자.",
-      tags: "상임이사회, 의장, 미국, 남자"
+      extra: "성별: 남자\n시그마의 국장.",
+      tags: "시그마, 국장, 미국, 남자"
     }
   ],
   cases: [
